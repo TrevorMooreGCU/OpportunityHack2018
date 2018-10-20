@@ -25,7 +25,6 @@ public class HomeController
 		mav.addObject("login", new CredentialModel());
 		mav.addObject("search", new SearchModel());
 
-		
 		return mav;
 	}
 
