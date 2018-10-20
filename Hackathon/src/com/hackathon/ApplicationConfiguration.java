@@ -22,10 +22,12 @@ import com.hackathon.services.data.IRegistrationDAO;
 import com.hackathon.services.data.ISecurityDAO;
 import com.hackathon.services.data.ImportDAO;
 import com.hackathon.services.data.IEmployeeDAO;
+import com.hackathon.services.data.IExportDAO;
 import com.hackathon.services.data.IImportDAO;
 import com.hackathon.services.data.RegistrationDAO;
 import com.hackathon.services.data.SecurityDAO;
 import com.hackathon.services.data.EmployeeDAO;
+import com.hackathon.services.data.ExportDAO;
 
 @Configuration
 public class ApplicationConfiguration 
@@ -55,6 +57,11 @@ public class ApplicationConfiguration
 	public EmployeeController getEmployeeController()
 	{
 		return new EmployeeController();
+	}
+	@Bean(name="uploadController")
+	public UploadController getUploadController()
+	{
+		return new UploadController();
 	}
 	
 	
@@ -114,6 +121,12 @@ public class ApplicationConfiguration
 	public IImportDAO getImportDAO()
 	{
 		return new ImportDAO();
+	}
+	@Bean(name="exportDAO")
+	@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
+	public IExportDAO getExportDAO()
+	{
+		return new ExportDAO();
 	}
 
 	@Bean(name="dataSource", destroyMethod = "close")

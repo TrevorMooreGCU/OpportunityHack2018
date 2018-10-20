@@ -31,7 +31,7 @@ public class ParseHelper {
                     for(int i=0;i<nextLine.length;i++){
                     	
                     	String[] values = nextLine[i].split(",");
-                        //System.out.println(nextLine[i]);
+                        System.out.println(nextLine[i]);
                     	rawRows.add(values);
                     }
                 }
