@@ -59,20 +59,16 @@
 					<%
 						}
 					%>
+					
+					<li><a href="<c:url value="/upload/" />">Upload Data</a></li>
+					
 				</ul>
 				
 				
 
 				<!--Search form start -->
 				<!-- method="POST" action="search" -->
-				<form:form method="POST" action="${pageContext.request.contextPath}/search/securesearch" modelAttribute="search" class="navbar-form navbar-left" role="search">
-					<div class="input-group">
-				        <form:input type="text" class="form-control" placeholder="Search" path="search"></form:input>
-					    <span class="input-group-btn">
-	                        <input type="submit" value="Search" class="btn btn-default" />
-	                    </span>
-				    </div>
-				</form:form>
+
 				<!--Search form end -->
 
 				

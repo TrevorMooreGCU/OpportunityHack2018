@@ -4,19 +4,25 @@
 
 
 
-
-
-
-
 package com.hackathon.services.business;
 
+<<<<<<< HEAD
 import java.io.File;
+=======
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+>>>>>>> master
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.hackathon.model.CredentialModel;
 import com.hackathon.model.EmployeeModel;
 import com.hackathon.services.data.IImportDAO;
 import com.hackathon.services.data.ISecurityDAO;
+import com.opencsv.CSVReader;
 
 public class ImportService implements IImportService
 {
@@ -25,8 +31,12 @@ public class ImportService implements IImportService
 	
 	
 	@Override
+<<<<<<< HEAD
 	public boolean importFile(File serverFile) {
 		
+=======
+	public boolean importFile(File file) {
+>>>>>>> master
 		
 		
 		
@@ -43,11 +53,18 @@ public class ImportService implements IImportService
 		//add to list of models
 		//insert to column data table with column name id relating to id above
 		
+<<<<<<< HEAD
 		
 		//deserialize data?
 
 
 
+=======
+	
+		
+		
+		
+>>>>>>> master
 		
 		
 		return false;
