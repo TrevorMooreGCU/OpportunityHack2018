@@ -1,2 +1,2 @@
-# HackathonTemplate
-Spring template
+# Hackathon DataSet Analyzer
+Spring MVC
