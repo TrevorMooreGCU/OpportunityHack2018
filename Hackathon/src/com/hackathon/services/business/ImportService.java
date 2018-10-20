@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.hackathon.helpers.ParseHelper;
 import com.hackathon.model.CredentialModel;
 import com.hackathon.model.EmployeeModel;
 import com.hackathon.services.data.IImportDAO;
@@ -47,7 +49,7 @@ public class ImportService implements IImportService
 		
 	
 		
-		
+		ParseHelper.parseFile(file);
 		
 		
 		
