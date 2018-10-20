@@ -14,10 +14,12 @@ import com.hackathon.services.business.ILoginService;
 import com.hackathon.services.business.IRegisterService;
 import com.hackathon.services.business.ImportService;
 import com.hackathon.services.business.IEmployeeService;
+import com.hackathon.services.business.IExportService;
 import com.hackathon.services.business.IImportService;
 import com.hackathon.services.business.LoginService;
 import com.hackathon.services.business.RegisterService;
 import com.hackathon.services.business.EmployeeService;
+import com.hackathon.services.business.ExportService;
 import com.hackathon.services.data.IRegistrationDAO;
 import com.hackathon.services.data.ISecurityDAO;
 import com.hackathon.services.data.ImportDAO;
@@ -89,6 +91,12 @@ public class ApplicationConfiguration
 	public IImportService getImportService()
 	{
 		return new ImportService();
+	}
+	@Bean(name="exportService")
+	@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
+	public IExportService getExportService()
+	{
+		return new ExportService();
 	}
 	
 	
