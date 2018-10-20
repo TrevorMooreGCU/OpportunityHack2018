@@ -29,10 +29,17 @@ public class ParseHelper {
                 CSVReader reader = new CSVReader(fileReader, ';', ch.charAt(0), 1);) {
                 while ((nextLine = reader.readNext()) != null) {
                     for(int i=0;i<nextLine.length;i++){
-                        System.out.println(nextLine[i]);
+                    	
+                    	String[] values = nextLine[i].split(",");
+                        //System.out.println(nextLine[i]);
+                    	rawRows.add(values);
                     }
                 }
             }
+            
+            
+            
+            
         } catch (IOException e) {
             System.out.println("error while reading csv and put to db : " + e.getMessage());
         } 
