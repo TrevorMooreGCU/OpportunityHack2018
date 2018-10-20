@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+
+<tiles-definitions>
+	<!-- NOTE! WE MUST ADD ALL BODY VIEWS TO THE PAGE (EVERY SINGLE JSP FILE) -->
+	
+	<!-- THESE ARE ALL LOGGED OUT VIEWS -->
+	<definition name="registerUser" extends="DefaultTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/registerUser.jsp" />
+	</definition>
+	<definition name="loginUser" extends="DefaultTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/loginUser.jsp" />
+	</definition>
+	<definition name="searchError" extends="DefaultTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/searchError.jsp" />
+	</definition>
+	<definition name="registerSuccess" extends="DefaultTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/registerSuccess.jsp" />
+	</definition>
+	<definition name="home" extends="DefaultTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/home.jsp" />
+	</definition>
+	<definition name="error" extends="DefaultTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/error.jsp" />
+	</definition>
+	
+	
+	<!-- THESE ARE ALL LOGGED IN/SECURE VIEWS -->
+	<definition name="welcomeHome" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/welcomeHome.jsp" />
+	</definition>
+	<definition name="secureHome" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/secureHome.jsp" />
+	</definition>
+	<definition name="secureSearchError" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/secureSearchError.jsp" />
+	</definition>
+	<definition name="addEmployee" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/addEmployee.jsp" />
+	</definition>
+	<definition name="viewEmployees" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/viewEmployees.jsp" />
+	</definition>
+	<definition name="removeEmployee" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/removeEmployee.jsp" />
+	</definition>
+	<definition name="secureError" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/secureError.jsp" />
+	</definition>
+	
+</tiles-definitions>
+
+
+

@@ -1,0 +1,38 @@
+CREATE TABLE `authemployee` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `FIRSTNAME` varchar(25) NOT NULL,
+  `LASTNAME` varchar(25) NOT NULL,
+  `PHONE` varchar(10) NOT NULL,
+  `EMAIL` varchar(40) NOT NULL,
+  `EMPLOYEEID` varchar(40) NOT NULL,
+  `IS_ADMIN` varchar(1) NOT NULL,
+  `IS_ACTIVE` varchar(1) NOT NULL,
+  `IS_TERMINATED` varchar(1) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+CREATE TABLE `authusers` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `USERSID` int(11) NOT NULL,
+  `USERNAME` varchar(25) NOT NULL,
+  `PASSWORD` varchar(100) NOT NULL,
+  `USERKEY` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  FOREIGN KEY fk_authemployee_id(`USERSID`)
+  REFERENCES authemployee(`ID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+INSERT INTO `authemployee` (`FIRSTNAME`, `LASTNAME`, `PHONE`, `EMAIL`, `EMPLOYEEID`, `IS_ADMIN`, `IS_ACTIVE`, `IS_TERMINATED`) VALUES ('Trevor', 'Moore', '6028103667', 'trevor@gmail.com', '123456', '1', '1', '0');
+
+INSERT INTO `authemployee` (`FIRSTNAME`, `LASTNAME`, `PHONE`, `EMAIL`, `EMPLOYEEID`, `IS_ADMIN`, `IS_ACTIVE`, `IS_TERMINATED`) VALUES ('Jordan', 'Riley', '6023246879', 'jordan]@gmail.com', '234567', '1', '1', '0');
+
+INSERT INTO `authemployee` (`FIRSTNAME`, `LASTNAME`, `PHONE`, `EMAIL`, `EMPLOYEEID`, `IS_ADMIN`, `IS_ACTIVE`, `IS_TERMINATED`) VALUES ('Carter', 'Rice', '6022135287', 'carter]@gmail.com', '345678', '0', '1', '0');
+
+INSERT INTO `authemployee` (`FIRSTNAME`, `LASTNAME`, `PHONE`, `EMAIL`, `EMPLOYEEID`, `IS_ADMIN`, `IS_ACTIVE`, `IS_TERMINATED`) VALUES ('Stone', 'Sommers', '6239263527', 'stone@gmail.com', '456789', '0', '1', '0');
+
+INSERT INTO `authemployee` (`FIRSTNAME`, `LASTNAME`, `PHONE`, `EMAIL`, `EMPLOYEEID`, `IS_ADMIN`, `IS_ACTIVE`, `IS_TERMINATED`) VALUES ('Kyle', 'DeHart', '6021902501', 'kyle@gmail.com', '567890', '0', '1', '0');
