@@ -42,7 +42,7 @@ public class DynamicFormController {
 			{
 		        ModelAndView mav = new ModelAndView("viewDynamicForm");
 		        
-		        List columnHeaders = new ArrayList<ColumnHeadModel>(tableService.tableForm(table));
+		        ArrayList<ColumnHeadModel> columnHeaders = new ArrayList<ColumnHeadModel>(tableService.tableForm(table));
 		
 		        mav.addObject("tableTitle", new TableModel());
 		        mav.addObject("columnHeaders", columnHeaders);
