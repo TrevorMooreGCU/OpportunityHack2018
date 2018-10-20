@@ -10,6 +10,8 @@
 
 package com.hackathon.services.business;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import com.hackathon.model.CredentialModel;
 import com.hackathon.model.EmployeeModel;
@@ -23,10 +25,10 @@ public class ImportService implements IImportService
 	
 	
 	@Override
-	public boolean importFile(Object file) {
+	public boolean importFile(File serverFile) {
 		
 		
-		//deserialize data?
+		
 		
 		//use file name to insert into table info table
 		//use id from table info to create column info table
@@ -42,10 +44,10 @@ public class ImportService implements IImportService
 		//insert to column data table with column name id relating to id above
 		
 		
-		
-		
-		
-		
+		//deserialize data?
+
+
+
 		
 		
 		return false;
