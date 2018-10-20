@@ -9,7 +9,7 @@
 	<div class="input-group">
 	    <label class="input-group-btn">
 	        <span class="btn btn-primary">
-	            Browse&hellip; <input type="file" style="display: none;" multiple>
+	            Browse&hellip; <input type="file" id="file" name="file" style="display: none;" multiple>
 	        </span>
 	    </label>
 	    <input type="text" class="form-control" readonly>

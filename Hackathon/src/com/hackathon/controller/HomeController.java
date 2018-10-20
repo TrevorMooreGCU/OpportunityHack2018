@@ -26,8 +26,6 @@ public class HomeController
 		mav.addObject("search", new SearchModel());
 
 		
-		System.out.println("home called");
-		
 		return mav;
 	}
 

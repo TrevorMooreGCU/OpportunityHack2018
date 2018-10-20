@@ -119,10 +119,7 @@ public class UploadController
 	}
 	
 	@RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
-	public ModelAndView uploadFile(
-	        ModelMap model,
-	        @RequestParam MultipartFile file,
-	        HttpServletRequest request) 
+	public ModelAndView uploadFile(ModelMap model, @RequestParam("file") MultipartFile file, HttpServletRequest request) 
 	{
 	 
 		ModelAndView mav = new ModelAndView("displayData");
