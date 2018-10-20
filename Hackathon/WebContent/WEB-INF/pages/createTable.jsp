@@ -10,7 +10,7 @@
 	<br/>
 	
 	<div class="form-group">
-    	<form:label class="control-label col-md-2" path="tableName">First Name:</form:label>
+    	<form:label class="control-label col-md-2" path="tableName">DataSet Name:</form:label>
     		<div class="col-md-10">
     			<form:input class="form-control" path="tableName"></form:input>
     			<form:errors path="tableName" cssClass="errors"/>
@@ -19,7 +19,7 @@
 	
 	<div class="form-group">
 		<div class="col-md-offset-2 col-md-10">
-			<input type="submit" value="Create Table" class="btn btn-default" />
+			<input type="submit" value="Create DataSet" class="btn btn-default" />
 		</div>
 	</div>
 	

@@ -6,8 +6,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import com.hackathon.model.CredentialModel;
-import com.hackathon.model.RegisterModel;
-import com.hackathon.model.SearchModel;
 import com.hackathon.model.TableModel;
 import com.hackathon.services.business.IImportService;
 
@@ -37,7 +34,7 @@ public class UploadController
 		this.importService = service;
 	}
 
-	@RequestMapping(path="/", method=RequestMethod.GET)
+	@RequestMapping(path="/uploadcsv", method=RequestMethod.GET)
 	public ModelAndView displayCSVUpload()
 	{
 		ModelAndView mav = new ModelAndView("csvUpload");
@@ -45,7 +42,7 @@ public class UploadController
 		return mav;
 	}
 	
-	@RequestMapping(path="/test", method=RequestMethod.GET)
+	@RequestMapping(path="/uploadtable", method=RequestMethod.GET)
 	public ModelAndView displayTableUpload()
 	{
 		ModelAndView mav = new ModelAndView("createTable");
@@ -55,75 +52,32 @@ public class UploadController
 	}
 	
 	@RequestMapping(path="/adddataset", method=RequestMethod.POST)
-	public ModelAndView createTable(@Valid @ModelAttribute("register") TableModel table, BindingResult result)
+	public ModelAndView createTable(@Valid @ModelAttribute("table") TableModel table, BindingResult result, HttpSession session)
 	{
-		/*if(result.hasErrors())
+		if(result.hasErrors())
 		{
 			ModelAndView mav = new ModelAndView("createTable");
-			mav.addObject("table", new TableModel());
-
-			return mav;
+			mav.addObject("table", table);
 
 			return mav;
 		}
 
-		try
-		{
-			String results = registerService.register(user);
-
-			if(results == "success")
-			{
-				ModelAndView mav = new ModelAndView("registerSuccess");
-				
-				mav.addObject("login", new CredentialModel());
-				mav.addObject("register", user);
-				mav.addObject("search", new SearchModel());
-				
-				return mav;
-			}
-			else if(results == "failure")
-			{
-				ModelAndView mav = new ModelAndView("error");
-				
-				mav.addObject("login", new CredentialModel());
-				mav.addObject("search", new SearchModel());
-
-				return mav;
-			}
-			else
-			{
-				ModelAndView mav = new ModelAndView("registerUser");
-				
-				mav.addObject("login", new CredentialModel());
-				mav.addObject("register", user);
-				mav.addObject("search", new SearchModel());
-
-				mav.addObject("message", "Username is already taken, please choose another one.");
-
-				return mav;
-			}
-		}
-		catch(Exception e)
-		{
-			System.out.println("Database Exception. Caught in Register Controller.");
-
-			ModelAndView mav = new ModelAndView("error");
-			
-			mav.addObject("login", new CredentialModel());
-			mav.addObject("search", new SearchModel());
-
-			return mav;
-		}*/
+		session.setAttribute("table" , table.getTableName());
 		
-		return null;
+		ModelAndView mav = new ModelAndView("csvUpload");
+		
+		return mav;
+
+
 	}
 	
 	@RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
-	public ModelAndView uploadFile(ModelMap model, @RequestParam("file") MultipartFile file, HttpServletRequest request) 
+	public ModelAndView uploadFile(ModelMap model, @RequestParam("file") MultipartFile file, HttpServletRequest request, HttpSession session)
 	{
 	 
 		ModelAndView mav = new ModelAndView("displayData");
 		ModelAndView emav = new ModelAndView("secureError");
+		String table = (String) session.getAttribute("table");
 		
 	    if (file.isEmpty()) 
 	    {
@@ -154,7 +108,7 @@ public class UploadController
 	    }
 	    
 	    
-	    if(importService.importFile(serverFile)) 
+	    if(importService.importFile(serverFile, table)) 
 	    	return mav;
 	    else
 	    	return emav;

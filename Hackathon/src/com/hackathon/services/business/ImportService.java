@@ -29,7 +29,7 @@ public class ImportService implements IImportService
 	
 	
 	@Override
-	public boolean importFile(File file) {
+	public boolean importFile(File file, String table) {
 		
 		
 		//deserialize data?

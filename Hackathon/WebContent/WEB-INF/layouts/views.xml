@@ -51,6 +51,9 @@
 	<definition name="csvUpload" extends="LoggedInTemplate">
     	<put-attribute name="body" value="/WEB-INF/pages/csvUpload.jsp" />
 	</definition>
+	<definition name="createTable" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/createTable.jsp" />
+	</definition>
 	
 </tiles-definitions>
 

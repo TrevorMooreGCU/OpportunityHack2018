@@ -10,7 +10,7 @@ public interface IImportService
 {
 
 
-	public boolean importFile(File file);
+	public boolean importFile(File file, String table);
 
 	
 	

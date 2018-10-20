@@ -60,7 +60,7 @@
 						}
 					%>
 					
-					<li><a href="<c:url value="/upload/" />">Upload Data</a></li>
+					<li><a href="<c:url value="/upload/uploadtable" />">Upload Data</a></li>
 					
 				</ul>
 				
