@@ -9,15 +9,20 @@ import com.hackathon.controller.HomeController;
 import com.hackathon.controller.LoginController;
 import com.hackathon.controller.RegisterController;
 import com.hackathon.controller.SearchController;
+import com.hackathon.controller.UploadController;
 import com.hackathon.services.business.ILoginService;
 import com.hackathon.services.business.IRegisterService;
+import com.hackathon.services.business.ImportService;
 import com.hackathon.services.business.IEmployeeService;
+import com.hackathon.services.business.IImportService;
 import com.hackathon.services.business.LoginService;
 import com.hackathon.services.business.RegisterService;
 import com.hackathon.services.business.EmployeeService;
 import com.hackathon.services.data.IRegistrationDAO;
 import com.hackathon.services.data.ISecurityDAO;
+import com.hackathon.services.data.ImportDAO;
 import com.hackathon.services.data.IEmployeeDAO;
+import com.hackathon.services.data.IImportDAO;
 import com.hackathon.services.data.RegistrationDAO;
 import com.hackathon.services.data.SecurityDAO;
 import com.hackathon.services.data.EmployeeDAO;
@@ -53,8 +58,6 @@ public class ApplicationConfiguration
 	}
 	
 	
-	
-	
 	/// BUSINESS SERVICES ///
 	@Bean(name="loginService")
 	@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
@@ -74,7 +77,12 @@ public class ApplicationConfiguration
 	{
 		return new EmployeeService();
 	}
-	
+	@Bean(name="importService")
+	@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
+	public IImportService getImportService()
+	{
+		return new ImportService();
+	}
 	
 	
 	
@@ -99,6 +107,13 @@ public class ApplicationConfiguration
 	public IEmployeeDAO getEmployeeDAO()
 	{
 		return new EmployeeDAO();
+	}
+	
+	@Bean(name="importDAO")
+	@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
+	public IImportDAO getImportDAO()
+	{
+		return new ImportDAO();
 	}
 
 	@Bean(name="dataSource", destroyMethod = "close")

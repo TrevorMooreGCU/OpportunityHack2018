@@ -45,7 +45,7 @@ public class UploadController
 		return mav;
 	}
 	
-	@RequestMapping(path="/", method=RequestMethod.GET)
+	@RequestMapping(path="/test", method=RequestMethod.GET)
 	public ModelAndView displayTableUpload()
 	{
 		ModelAndView mav = new ModelAndView("createTable");
@@ -57,7 +57,7 @@ public class UploadController
 	@RequestMapping(path="/adddataset", method=RequestMethod.POST)
 	public ModelAndView createTable(@Valid @ModelAttribute("register") TableModel table, BindingResult result)
 	{
-		if(result.hasErrors())
+		/*if(result.hasErrors())
 		{
 			ModelAndView mav = new ModelAndView("createTable");
 			mav.addObject("table", new TableModel());
@@ -113,7 +113,9 @@ public class UploadController
 			mav.addObject("search", new SearchModel());
 
 			return mav;
-		}
+		}*/
+		
+		return null;
 	}
 	
 	@RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
