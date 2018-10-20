@@ -1,8 +1,6 @@
 
 
-
-
-<form action="${pageContext.request.contextPath}/upload/uploadfile" method="POST" enctype="multipart/form-data" >
+<form action="${pageContext.request.contextPath}/upload/uploadfile" method="POST" enctype="multipart/form-data">
 
 <div class="form-horizontal">
 
