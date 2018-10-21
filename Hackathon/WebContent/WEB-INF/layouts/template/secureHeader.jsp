@@ -60,9 +60,13 @@
 						}
 					%>
 					
+					<li><a href="<c:url value="/dashboard/main" />">Dashboard</a></li>
+					
 					<li><a href="<c:url value="/upload/uploadtable" />">Upload Data</a></li>
 					
 					<li><a href="<c:url value="/export/downloadCSV" />">Download CSV</a></li>
+					
+					<li><a href="<c:url value="/dynamic/getdataset" />">Get DataSet</a></li>
 					
 				</ul>
 				

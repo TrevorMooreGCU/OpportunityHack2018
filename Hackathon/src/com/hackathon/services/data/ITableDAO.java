@@ -13,6 +13,8 @@ public interface ITableDAO {
 	
 	public ArrayList<ColumnHeadModel> getColumns(TableModel table);
 	
+	public int getNumberColumns(TableModel table);
+	
 	public ArrayList<ColumnDataModel>getColumnData(int id, TableModel table);
 	
 }

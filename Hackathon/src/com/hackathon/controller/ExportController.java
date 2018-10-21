@@ -1,11 +1,13 @@
 package com.hackathon.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.supercsv.io.CsvBeanWriter;
@@ -13,14 +15,25 @@ import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import com.hackathon.model.Book;
+import com.hackathon.model.TableModel;
+import com.hackathon.services.business.ITableService;
 
 @Controller
 @RequestMapping("/export")
 public class ExportController 
 {
+	ITableService tableService;
+	
+	@Autowired
+	public void setTableFormService(ITableService service) {
+		this.tableService = service;
+	}
+	
+	
 	@RequestMapping(value = "/downloadCSV")
     public void downloadCSV(HttpServletResponse response) throws IOException {
  
+		TableModel table = new TableModel(24, "Dogs");
         String csvFileName = "books.csv";
  
         response.setContentType("text/csv");
@@ -53,8 +66,7 @@ public class ExportController
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
                 CsvPreference.STANDARD_PREFERENCE);
  
-        String[] header = { "Title", "Description", "Author", "Publisher",
-                "isbn", "PublishedDate", "Price" };
+        String[] header = new String[tableService.getNumberColumns(table)];
  
         csvWriter.writeHeader(header);
  
