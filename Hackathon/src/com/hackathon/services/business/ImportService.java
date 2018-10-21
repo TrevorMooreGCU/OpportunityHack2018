@@ -121,9 +121,8 @@ public class ImportService implements IImportService
 		//check for spaces, check for reserved words, check for alphabetical or numbers
 		
 		boolean hasSpaces = name.contains(" ");
-		System.out.println("0");
+
 		if (!hasSpaces) {
-			System.out.println("1");
 			String regex = "^[a-zA-Z0-9]+$";
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher(name);
@@ -131,15 +130,12 @@ public class ImportService implements IImportService
 			boolean hasInvalidCharacters = !matcher.matches();
 			
 			if (!hasInvalidCharacters) {
-				System.out.println("2");
 				boolean hasKeywords = importDAO.containsReservedWord(name);
 				
 				if (!hasKeywords) {
-					System.out.println("3");
 					boolean tableNameExists = importDAO.tableNameExists(name);
 					
 					if (!tableNameExists) {
-						System.out.println("4");
 						return true;
 					}
 

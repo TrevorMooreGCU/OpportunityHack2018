@@ -89,12 +89,16 @@ public class UploadController
 	@RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
 	public ModelAndView uploadFile(ModelMap model, @RequestParam("file") MultipartFile file, HttpServletRequest request, HttpSession session)
 	{
-		ModelAndView errmav = new ModelAndView("secureError");
+		ModelAndView errmav = new ModelAndView("csvUpload");
 		TableModel table = (TableModel) session.getAttribute("table");
 		
-	    if (file.isEmpty()) 
+	    if (file.isEmpty() || !importService.validTableName(table.tableName)) 
 	    {
 	    	System.out.println("Database Exception. Caught in Employee Controller.");
+	    	errmav.addObject("message", "Invalid file, cannot be empty");
+
+	    	
+
 			return errmav;
 	    }
 	 

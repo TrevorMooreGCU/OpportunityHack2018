@@ -23,6 +23,13 @@
 		<input type="submit" value="Upload" class="btn btn-default" />
 	</div>
 	
+	
+		<div class="form-group">
+		<div class="col-md-offset-2 col-md-10">
+			<p style="color:#ff0000;">${message}</p>
+		</div>
+	</div>
+	
 </div>
 
 </form>
