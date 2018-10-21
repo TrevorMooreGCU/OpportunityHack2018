@@ -1,9 +1,11 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 
 
-<h2>${tableTitle.tableName}</h2>
+
 <div class="containter">
 <div class="form-horizontal table-responsive-sm">
+<h2>${tableTitle.tableName}</h2>
+<a href="<c:url value="/export/downloadCSV?file=${tableTitle.tableName}" />" class="btn btn-default">Download ${tableTitle.tableName}.csv</a>
 <table class="table">
 		<thead>
 			<tr>

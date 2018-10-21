@@ -1,15 +1,21 @@
 package com.hackathon.controller;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 import com.hackathon.model.ColumnsModel;
+import com.hackathon.model.ColumnDataModel;
 import com.hackathon.model.ColumnHeadModel;
 import com.hackathon.model.TableModel;
 import com.hackathon.services.business.ITableService;
@@ -20,17 +26,20 @@ public class ExportController
 {
 	ITableService tableService;
 	
+	private static final String COMMA_DELIMITER = ",";
+    private static final String LINE_SEPARATOR = "\n";
+	
 	@Autowired
 	public void setTableFormService(ITableService service) {
 		this.tableService = service;
 	}
 	
 	
-	@RequestMapping(value = "/downloadCSV")
-    public void downloadCSV(HttpServletResponse response) throws IOException {
+	@RequestMapping(value = "/downloadCSV*")
+    public void downloadCSV(@RequestParam(value = "file", required = false) String file, HttpServletResponse response) throws IOException {
  
-		TableModel table = new TableModel(29, "dogs");
-        String csvFileName = "books.csv";
+		TableModel table = new TableModel(0, file);
+        String csvFileName = file+".csv";
  
         response.setContentType("text/csv");
  
@@ -43,8 +52,6 @@ public class ExportController
         int numberColumns = tableService.getNumberColumns(table);
         
         ArrayList<ColumnHeadModel> columns = new ArrayList<ColumnHeadModel>(tableService.getColumns(table));
-        
-        
         
         
         
@@ -82,53 +89,96 @@ public class ExportController
         	ColumnsModel model = new ColumnsModel();
         	for(ColumnHeadModel column : columns)
         	{
-        		model.addString(tableService.getColumnData(i, column.getId(), table).getColumnData());
+        		csvWriter.write(tableService.getColumnData(i, column.getId(), table).getColumnData(), header[i]);
         		i++;
         	}
-        	csvWriter.write(model, header);
+        	i=0;
+        	//csvWriter.write(header, header);
         }
- 
+        
         csvWriter.close();
     }
 	
 	
-	/**
-	@RequestMapping(value = "/downloadCSV")
-    public void downloadCSV(HttpServletResponse response) throws IOException 
+	
+	@RequestMapping(value = "/download")
+    public void download(@RequestParam(value = "file", required = false) String file, HttpServletResponse response) throws IOException
 	{
-        String csvFileName = "yourfile.csv";
+		TableModel table = new TableModel(0, file);
+        String csvFileName = file+".csv";
  
         response.setContentType("text/csv");
- 
-        // creates mock data
-        String headerKey = "Content-Disposition";
-        String headerValue = String.format("attachment; filename=\"%s\"",
-                csvFileName);
-        response.setHeader(headerKey, headerValue);
- 
-        //get table name
         
-        //retrieve columns based off table name
+		int numberColumns = tableService.getNumberColumns(table);
         
-        //retrieve data based off columns
- 
-        List<> columnData = Arrays.asList(book1, book2, book3, book4);
- 
-        // uses the Super CSV API to generate CSV data from the model data
-        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
-                CsvPreference.STANDARD_PREFERENCE);
- 
-        String[] header = { "Title", "Description", "Author", "Publisher",
-                "isbn", "PublishedDate", "Price" };
- 
-        csvWriter.writeHeader(header);
- 
+        ArrayList<ColumnHeadModel> columns = new ArrayList<ColumnHeadModel>(tableService.getColumns(table));
         
-        for (Book columnData : listBooks) {
-            csvWriter.write(aBook, header);
+        ArrayList<ArrayList<ColumnDataModel>> columnData = new ArrayList<ArrayList<ColumnDataModel>>();
+        
+        int numberRows = tableService.getNumberRows(table);
+        System.out.print(numberColumns);
+        
+        int i = 1;
+        
+        for(int x = 0; x < numberRows; x++)
+        {
+        	ArrayList<ColumnDataModel> newList = new ArrayList<ColumnDataModel>();
+        	for(ColumnHeadModel datacolumn : columns)
+        	{
+        		newList.add(tableService.getColumnData(i, datacolumn.getId(), table));
+        		i++;
+        	}
+        	columnData.add(newList);
         }
- 
-        csvWriter.close();
-    }
-	**/
+		
+		FileWriter fileWriter = null;
+		
+		try
+		{
+			fileWriter = new FileWriter(csvFileName);
+
+			Iterator it = columns.iterator();
+			while(it.hasNext())
+			{
+				ColumnHeadModel e = (ColumnHeadModel)it.next();
+				fileWriter.append(e.getColumnName());
+				fileWriter.append(COMMA_DELIMITER);
+			}
+			fileWriter.append(LINE_SEPARATOR);
+			
+			for(int y = 0; y < numberRows; y++)
+			{
+				for(int x = 0; x < numberColumns; x++)
+				{
+					fileWriter.append(columnData.get(y).get(x).getColumnData());
+					fileWriter.append(COMMA_DELIMITER);
+				}
+				fileWriter.append(LINE_SEPARATOR);
+			}
+			
+			
+			
+			
+			
+			System.out.println("Write to CSV file Succeeded!!!");
+		}
+		catch(Exception ee)
+		{
+			ee.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				fileWriter.flush();
+				fileWriter.close();
+			}
+			catch(IOException ie)
+			{
+				System.out.println("Error occured while closing the fileWriter");
+		  			ie.printStackTrace();
+		  	}
+		}
+	}
+	
 }
