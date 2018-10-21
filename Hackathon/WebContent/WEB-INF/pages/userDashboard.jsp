@@ -16,13 +16,13 @@
 		
 		  	
 		  	<div class="container" id="options" style="display:none;">
-		  		<button type="button" class="btn btn-primary" onclick="showViewTable()" data-dismiss="modal">View Table</button>
+		  		<a href="<c:url value="/dynamic/getdataset?table=${tableNames.tableName}" />"><button type="button" class="btn btn-primary" onclick="showViewTable()" data-dismiss="modal">View Table</button></a>
 		  		
 		  		<button type="button" class="btn btn-primary" onclick="showNewInput()" data-dismiss="modal">New Input</button>
 		  		
-		  		<button type="button" class="btn btn-primary" onclick="showReportData()" data-dismiss="modal">Report Data</button>
+		  		<a href="<c:url value="/dynamic/analysis?table=${tableNames.tableName}" />"><button type="button" class="btn btn-primary" onclick="showReportData()" data-dismiss="modal">Report Data</button></a>
 		  		
-		  		<button type="button" class="btn btn-primary" onclick="showExportData()" data-dismiss="modal">Export Data</button>                                                                                                                          
+		  		<a href="<c:url value="/export/downloadCSV?file=${tableTitle.tableName}" />"><button type="button" class="btn btn-primary" onclick="showExportData()" data-dismiss="modal">Export Data</button></a>                                                                                                                          
 		  	</div>
 		
 			<div class="container" id="viewTable" style="display:none;">
