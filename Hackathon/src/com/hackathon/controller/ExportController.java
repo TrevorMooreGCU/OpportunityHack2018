@@ -2,19 +2,15 @@ package com.hackathon.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
-
-import com.hackathon.model.Book;
+import com.hackathon.model.ColumnsModel;
+import com.hackathon.model.ColumnHeadModel;
 import com.hackathon.model.TableModel;
 import com.hackathon.services.business.ITableService;
 
@@ -44,34 +40,52 @@ public class ExportController
                 csvFileName);
         response.setHeader(headerKey, headerValue);
  
-        Book book1 = new Book("Effective Java", "Java Best Practices",
-                "Joshua Bloch", "Addision-Wesley", "0321356683", "05/08/2008",
-                38);
+        int numberColumns = tableService.getNumberColumns(table);
+        
+        ArrayList<ColumnHeadModel> columns = new ArrayList<ColumnHeadModel>(tableService.getColumns(table));
+        
+        
+        
+        
+        
+        int numberRows = tableService.getNumberRows(table);
+        System.out.print(numberRows);
+        
+        int i = 1;
+        
+        
  
-        Book book2 = new Book("Head First Java", "Java for Beginners",
-                "Kathy Sierra & Bert Bates", "O'Reilly Media", "0321356683",
-                "02/09/2005", 30);
- 
-        Book book3 = new Book("Thinking in Java", "Java Core In-depth",
-                "Bruce Eckel", "Prentice Hall", "0131872486", "02/26/2006", 45);
- 
-        Book book4 = new Book("Java Generics and Collections",
-                "Comprehensive guide to generics and collections",
-                "Naftalin & Philip Wadler", "O'Reilly Media", "0596527756",
-                "10/24/2006", 27);
- 
-        List<Book> listBooks = Arrays.asList(book1, book2, book3, book4);
- 
+        
+        
+        
+        
         // uses the Super CSV API to generate CSV data from the model data
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
                 CsvPreference.STANDARD_PREFERENCE);
+        
  
-        String[] header = new String[tableService.getNumberColumns(table)];
+        String[] header = new String[numberColumns];
+        
+        for(int x = 0; x < numberColumns; x++)
+        {
+        	header[x] = columns.get(x).getColumnName();
+        }
  
         csvWriter.writeHeader(header);
- 
-        for (Book aBook : listBooks) {
-            csvWriter.write(aBook, header);
+        
+        
+        
+        
+        
+        for(int x = 0; x < numberRows; x++)
+        {
+        	ColumnsModel model = new ColumnsModel();
+        	for(ColumnHeadModel column : columns)
+        	{
+        		model.addString(tableService.getColumnData(i, column.getId(), table).getColumnData());
+        		i++;
+        	}
+        	csvWriter.write(model, header);
         }
  
         csvWriter.close();

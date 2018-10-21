@@ -93,7 +93,7 @@ public class DynamicFormController {
 		        
 		        ArrayList<ArrayList<ColumnDataModel>> columnData = new ArrayList<ArrayList<ColumnDataModel>>();
 		        
-		        int numberColumns = tableService.getNumberColumns(table);
+		        int numberColumns = tableService.getNumberRows(table);
 		        System.out.print(numberColumns);
 		        
 		        int i = 1;
@@ -114,18 +114,6 @@ public class DynamicFormController {
 		        mav.addObject("datacolumns", columnData);
 	
 		        return mav;
-		        
-		        
-		        
-		        
-		        
-		        
-		        
-		        
-		        
-		        
-		        
-		        
 			}
 			catch(Exception e)
 			{

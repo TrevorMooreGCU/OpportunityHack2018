@@ -45,6 +45,17 @@ public class TableFormService implements ITableService {
 	}
 	
 	@Override
+	public int getNumberRows(TableModel table)
+	{
+		try{
+			return tableDAO.getNumberRows(table);
+		}catch(Exception e) {
+			System.out.println("Database Exception. Caught in Employee Service.");
+			return 0;
+		}
+	}
+	
+	@Override
 	public int getNumberColumns(TableModel table)
 	{
 		try{

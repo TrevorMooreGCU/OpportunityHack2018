@@ -63,7 +63,7 @@ public class TableDAO implements ITableDAO {
 	}
 	
 	@Override
-	public int getNumberColumns(TableModel table)
+	public int getNumberRows(TableModel table)
 	{
 		String query1 = "SELECT * FROM "+table.getTableName()+"_columns";
 		String query2 = "SELECT * FROM "+table.getTableName()+"_data";
@@ -80,6 +80,20 @@ public class TableDAO implements ITableDAO {
 			j++;
 		
 		return j / i;
+	}
+	
+	@Override
+	public int getNumberColumns(TableModel table)
+	{
+		String query1 = "SELECT * FROM "+table.getTableName()+"_columns";
+		
+		SqlRowSet srs1 = jdbcTemplate.queryForRowSet(query1);
+		
+		int i = 0;
+		while(srs1.next()) 
+			i++;
+		
+		return i;
 	}
 	
 	@Override

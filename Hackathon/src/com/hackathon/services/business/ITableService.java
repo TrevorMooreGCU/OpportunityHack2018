@@ -13,6 +13,8 @@ public interface ITableService {
 	
 	public ArrayList<ColumnHeadModel> getColumns(TableModel table);
 	
+	public int getNumberRows(TableModel table);
+	
 	public int getNumberColumns(TableModel table);
 	
 	public ColumnDataModel getColumnData(int id, int columnid, TableModel table);
