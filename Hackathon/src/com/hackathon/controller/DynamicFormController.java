@@ -205,7 +205,7 @@ public class DynamicFormController {
 		}
 		
 		
-		return getDataSet(session);
+		return getDataSet(columnDataModelList.getTableName(), session);
 	}
 	
 	
