@@ -33,10 +33,10 @@
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			      	<button type="button" class="btn btn-primary" onclick="showViewTable" data-dismiss="modal">View Table</button>
-			      	<button type="button" class="btn btn-primary" onclick="showNewInput" data-dismiss="modal">New Input</button>
-			      	<button type="button" class="btn btn-primary" onclick="showReportData" data-dismiss="modal">Report Data</button>
-			      	<button type="button" class="btn btn-primary" onclick="showExportData" data-dismiss="modal">Export Data</button>
+			      	<button type="button" class="btn btn-primary" onclick="showViewTable()" data-dismiss="modal">View Table</button>
+			      	<button type="button" class="btn btn-primary" onclick="showNewInput()" data-dismiss="modal">New Input</button>
+			      	<button type="button" class="btn btn-primary" onclick="showReportData()" data-dismiss="modal">Report Data</button>
+			      	<button type="button" class="btn btn-primary" onclick="showExportData()" data-dismiss="modal">Export Data</button>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

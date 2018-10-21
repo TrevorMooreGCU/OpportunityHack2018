@@ -5631,6 +5631,7 @@ body.modal-open,
      -moz-transition: -moz-transform 0.3s ease-out;
        -o-transition: -o-transform 0.3s ease-out;
           transition: transform 0.3s ease-out;
+          padding-right: 45px;
 }
 
 .modal.in .modal-dialog {
