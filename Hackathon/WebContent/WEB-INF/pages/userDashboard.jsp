@@ -1,12 +1,20 @@
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4">
 			<!-- Will make a button for every table that user has created -->
 			
-			<button type="button" class="btn" data-toggle="modal" data-target="#modalDiscount">Basic</button>
-			
+			<c:forEach items="${$tableNames}" var="tableName" varStatus="status">
+				<c:choose>
+					<c:when test="${$tableNames.size() > 0}">
+					
+					</c:when>
+					<c:otherwise>
+						<button type="button" class="btn" data-toggle="modal" data-target="#modalDiscount">Table</button>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
 		</div>
 	</div>
 </div>
