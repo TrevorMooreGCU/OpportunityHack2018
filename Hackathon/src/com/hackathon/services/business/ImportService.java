@@ -150,7 +150,7 @@ public class ImportService implements IImportService
 		// TODO Auto-generated method stub
 		
 		//get column names from column names table (row count)
-		
+
 		int columnRowCount = importDAO.getColumnNames(tableName).size();
 		
 		if (columnRowCount == inputValues.size()) {

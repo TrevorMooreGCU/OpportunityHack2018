@@ -28,6 +28,5 @@ public class ColumnDataModelListWrapper {
 		this.tableName = tableName;
 	}
 	
-	
-	
+
 }
