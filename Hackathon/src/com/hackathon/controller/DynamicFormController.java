@@ -76,9 +76,6 @@ public class DynamicFormController {
 	
 	
 	
-	
-	
-	
 	@RequestMapping(path="/getdataset", method=RequestMethod.GET)
 	public ModelAndView getDataSet(HttpSession session, TableModel table) {
 		

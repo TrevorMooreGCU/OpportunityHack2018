@@ -76,7 +76,6 @@ public class ImportDAO implements IImportDAO {
 		String columnsTableName = tableName + "_columns";
 				
 		tableName = tableName + "_data";
-		
 
 		String createTableQuery = "CREATE TABLE " + tableName + " (" 
 			+ "  ID int(11) NOT NULL AUTO_INCREMENT,"
@@ -89,7 +88,6 @@ public class ImportDAO implements IImportDAO {
 			+ ") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
 		jdbcTemplate.execute(createTableQuery);
-
 		
 		String sql = "INSERT INTO " + tableName + " " + "(TABLE_NAME_ID,COLUMN_DATA, COLUMN_ID) " + "VALUES " + "(?,?, ?)";
 
