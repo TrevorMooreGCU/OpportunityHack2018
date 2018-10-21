@@ -5,17 +5,6 @@
 	    position: absolute;
 	    bottom: 0px;
 	}
-	
-	.image-height {
-	
-		
-	}
-	
-	
-	.carousel-height {
-	
-		height: 500px;
-	}
 
 </style>
 

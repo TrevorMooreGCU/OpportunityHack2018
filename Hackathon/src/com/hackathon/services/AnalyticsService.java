@@ -104,6 +104,7 @@ public class AnalyticsService
 				TableModel tm = new TableModel(0, table);
 		        
 		        int numberRows = tableService.getNumberRows(tm);
+		        ArrayList<ColumnHeadModel> columnHeaders = new ArrayList<ColumnHeadModel>(tableService.getColumns(tm));
 		        
 		        ArrayList<String> col1data = new ArrayList<String>();
 		        ArrayList<String> col2data = new ArrayList<String>();
@@ -115,21 +116,28 @@ public class AnalyticsService
 		        for(int x = 0; x < numberRows; x++)
 		        {
 			        System.out.println("TEST x " + x);
-
-	        			if(!col1data.contains(tableService.getColumnData(i, column1, tm).getColumnData()))
+			        for(ColumnHeadModel colum : columnHeaders)
+			        {
+	        			if(colum.getId() == column1)
     					{
-	        				col1data.add(tableService.getColumnData(i, column1, tm).getColumnData());
-	        				col2data.add("1");
+	        				if(!col1data.contains(tableService.getColumnData(i, column1, tm).getColumnData()))
+	        				{
+		        				col1data.add(tableService.getColumnData(i, column1, tm).getColumnData());
+		        				col2data.add("1");
+	        				}
+	        				else 
+		        			{
+		        				int index = col1data.indexOf(tableService.getColumnData(i, column1, tm).getColumnData());
+		        				int value = Integer.parseInt(col2data.get(index));
+		        				value++;
+		        				col2data.set(index, String.valueOf(value));
+		        			}
     					}
-	        			else 
-	        			{
-	        				int index = col1data.indexOf(tableService.getColumnData(i, column1, tm).getColumnData());
-	        				int value = Integer.parseInt(col2data.get(index));
-	        				value++;
-	        				col2data.set(index, String.valueOf(value));
-	        			}
+	        			
+	        			i++;
+			        }
 
-	        		i++;
+	        		
 		        }
 		        System.out.println("TEST HERE");
 
