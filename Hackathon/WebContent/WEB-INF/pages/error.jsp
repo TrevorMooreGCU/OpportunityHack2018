@@ -1,5 +1,5 @@
 
-<div class="form-horizontal">
+<div class="form-horizontal" style="overflow-x:scroll;">
 	<h2>We Encountered an Error...</h2>
 	<hr/>
 	<br/>

@@ -3,7 +3,7 @@
 <%@ page import="java.util.*" %>
 
 
-<div class="form-horizontal">
+<div class="form-horizontal" style="overflow-x:scroll;">
 
 <form:form method="POST" action="${pageContext.request.contextPath}/dynamic/addinput" modelAttribute="wrapper">
 <table class="table">

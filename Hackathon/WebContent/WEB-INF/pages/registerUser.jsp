@@ -4,7 +4,7 @@
 
 <form:form method="POST" action="registeruser" modelAttribute="register">
 
-<div class="form-horizontal">
+<div class="form-horizontal" style="overflow-x:scroll;">
 	<h2>Sign Up</h2>
 	<hr/>
 	<br/>

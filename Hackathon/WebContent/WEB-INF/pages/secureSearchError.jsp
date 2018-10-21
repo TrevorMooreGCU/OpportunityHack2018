@@ -2,7 +2,7 @@
 
 <form:form modelAttribute="search">
 
-<div class="form-horizontal">
+<div class="form-horizontal" style="overflow-x:scroll;">
 
 	<div class="form-group">
     		<div class="col-md-10">
