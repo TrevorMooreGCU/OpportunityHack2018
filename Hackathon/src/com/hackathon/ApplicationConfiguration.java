@@ -162,7 +162,7 @@ public class ApplicationConfiguration
 	    dataSource.setUrl("jdbc:mysql://y2fkufcdev0yjma3:t9ylcf9w4aapkdfl@tuy8t6uuvh43khkk.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/nod3eke2u33fhtk2");
 	    dataSource.setUsername("y2fkufcdev0yjma3");
 	    dataSource.setPassword("t9ylcf9w4aapkdfl"); 
-	    dataSource.setInitialSize(1);
+	    dataSource.setInitialSize(3);
 	    return dataSource;
 	}
 	

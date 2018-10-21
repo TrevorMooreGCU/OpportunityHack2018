@@ -7,11 +7,11 @@ import com.hackathon.model.ColumnHeadModel;
 
 public interface IImportDAO {
 
-	public boolean insertTableName(String tableName);
+	public int insertTableName(String tableName);
 	
-	public boolean insertColumnNames(List<ColumnHeadModel> columnNames);
+	public boolean insertColumnNames(List<ColumnHeadModel> columnNames, String tableName);
 	
-	public boolean insertColumnData(List<ColumnDataModel> dataValues);
+	public boolean insertColumnData(List<ColumnDataModel> dataValues, String tableName);
 	
 	
 	

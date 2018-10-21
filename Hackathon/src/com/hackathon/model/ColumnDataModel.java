@@ -5,11 +5,13 @@ public class ColumnDataModel {
 	public int id;
 	public int columnNameId;
 	public String columnData;
+	public int tableNameId;
 	
-	public ColumnDataModel(int id, int columnNameId, String columnData) {
+	public ColumnDataModel(int id, int tableNameId, int columnNameId, String columnData) {
 		this.id = id;
 		this.columnNameId = columnNameId;
 		this.columnData = columnData;
+		this.tableNameId = tableNameId;
 	}
 
 	public int getId() {
@@ -34,6 +36,14 @@ public class ColumnDataModel {
 
 	public void setColumnData(String columnData) {
 		this.columnData = columnData;
+	}
+
+	public int getTableNameId() {
+		return tableNameId;
+	}
+
+	public void setTableNameId(int tableNameId) {
+		this.tableNameId = tableNameId;
 	}
 	
 }
