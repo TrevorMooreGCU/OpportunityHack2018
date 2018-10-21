@@ -65,7 +65,7 @@
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="<c:url value="/dashboard/main" />">View Data Sets</a></li>
 							<li><a href="<c:url value="/upload/uploadtable" />">Upload Data Set</a></li>
-							<li><a href="<c:url value="/dynamic/displayInputForm?tableName=people" />">Add Input</a></li>
+							<li><a href="<c:url value="/dynamic/displayInputForm?tableName=humans" />">Add Input</a></li>
 					
 						</ul>
 					</li>
