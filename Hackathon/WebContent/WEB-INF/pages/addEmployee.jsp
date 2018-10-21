@@ -4,7 +4,7 @@
 
 <form:form method="POST" action="addemployee" modelAttribute="employee">
 
-<div class="form-horizontal">
+<div class="form-horizontal" style="overflow-x:scroll;">
 	<h2>Add a New Employee</h2>
 	<hr/>
 	<br/>

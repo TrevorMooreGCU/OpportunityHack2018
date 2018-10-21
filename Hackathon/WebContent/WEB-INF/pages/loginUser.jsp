@@ -3,7 +3,7 @@
 
 <form:form method="POST" action="loginuser" modelAttribute="login">
 
-<div class="form-horizontal">
+<div class="form-horizontal" style="overflow-x:scroll;">
 	<h2>Login</h2>
 	<hr/>
 	<br/>

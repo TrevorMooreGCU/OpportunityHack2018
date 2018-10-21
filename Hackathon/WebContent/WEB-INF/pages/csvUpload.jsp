@@ -2,7 +2,7 @@
 
 <form action="${pageContext.request.contextPath}/upload/uploadfile" method="POST" enctype="multipart/form-data">
 
-<div class="form-horizontal">
+<div class="form-horizontal" style="overflow-x:scroll;">
 
 <h2>Upload Data for Reporting</h2>
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hackathon.model.ColumnDataModel;
@@ -89,10 +90,10 @@ public class DynamicFormController {
 	
 	
 	@RequestMapping(path="/analysis", method=RequestMethod.GET)
-	public ModelAndView getAnalysis(HttpSession session) 
+	public ModelAndView getAnalysis(@RequestParam(value = "table", required = false) String table, HttpSession session) 
 	{
 		ModelAndView mav = new ModelAndView("dataAnalysis");
-
+		mav.addObject("table", table);
         return mav;
 		
 	}
@@ -101,20 +102,20 @@ public class DynamicFormController {
 	
 	
 	@RequestMapping(path="/getdataset", method=RequestMethod.GET)
-	public ModelAndView getDataSet(HttpSession session) {
+	public ModelAndView getDataSet(@RequestParam(value = "table", required = false) String table, HttpSession session) {
 		
 		if(session != null && session.getAttribute("admin") != null)
 		{
 			try
 			{
-				TableModel table = new TableModel(33, "Schools");
+				TableModel thetable = new TableModel(0, table);
 		        ModelAndView mav = new ModelAndView("displayData");
 		        
-		        ArrayList<ColumnHeadModel> columnHeaders = new ArrayList<ColumnHeadModel>(tableService.getColumns(table));
+		        ArrayList<ColumnHeadModel> columnHeaders = new ArrayList<ColumnHeadModel>(tableService.getColumns(thetable));
 		        
 		        ArrayList<ArrayList<ColumnDataModel>> columnData = new ArrayList<ArrayList<ColumnDataModel>>();
 		        
-		        int numberColumns = tableService.getNumberRows(table);
+		        int numberColumns = tableService.getNumberRows(thetable);
 		        System.out.print(numberColumns);
 		        
 		        int i = 1;
@@ -124,13 +125,13 @@ public class DynamicFormController {
 		        	ArrayList<ColumnDataModel> newList = new ArrayList<ColumnDataModel>();
 		        	for(ColumnHeadModel datacolumn : columnHeaders)
 		        	{
-		        		newList.add(tableService.getColumnData(i, datacolumn.getId(), table));
+		        		newList.add(tableService.getColumnData(i, datacolumn.getId(), thetable));
 		        		i++;
 		        	}
 		        	columnData.add(newList);
 		        }
 		
-		        mav.addObject("tableTitle", table);
+		        mav.addObject("tableTitle", thetable);
 		        mav.addObject("columns", columnHeaders);
 		        mav.addObject("datacolumns", columnData);
 	
