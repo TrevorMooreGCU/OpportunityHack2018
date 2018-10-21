@@ -118,17 +118,10 @@ public class ImportDAO implements IImportDAO {
 		
 		tableName = "%" + tableName.toUpperCase() + "%";
 
-		int result = 0;
-		
-		try {
-			result = jdbcTemplate.queryForObject(query, new Object[] {tableName}, Integer.class);
-			
-			return (result > 0);
-		} catch (Exception e) {
+		SqlRowSet srs = jdbcTemplate.queryForRowSet(query, tableName);
 
-		}
 
-		return false;
+		return srs.next();
 		
 		
 	}
@@ -147,17 +140,11 @@ public class ImportDAO implements IImportDAO {
 		
 		String query = "SELECT * FROM nod3eke2u33fhtk2.tablenametable WHERE TABLE_NAME = ?";
 		
-		int result = 0;
-		
-		try {
-			result = jdbcTemplate.queryForObject(query, new Object[] {table}, Integer.class);
-			
-			return (result > 0);
-		} catch (Exception e) {
 
-		}
+		SqlRowSet srs = jdbcTemplate.queryForRowSet(query, table);
 
-		return false;
+
+		return srs.next();
 	}
 	
 	
