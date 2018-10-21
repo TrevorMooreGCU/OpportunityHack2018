@@ -48,6 +48,9 @@
 	<definition name="secureError" extends="LoggedInTemplate">
     	<put-attribute name="body" value="/WEB-INF/pages/secureError.jsp" />
 	</definition>
+	<definition name="structure" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/structure.jsp" />
+	</definition>
 	
 </tiles-definitions>
 

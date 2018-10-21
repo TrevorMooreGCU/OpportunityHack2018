@@ -41,17 +41,6 @@
 				
 				
 
-				<!--Search form start -->
-				<!-- 
-				<form:form method="POST" action="${pageContext.request.contextPath}/search/usersearch" modelAttribute="search" class="navbar-form navbar-left" role="search">
-				    <div class="form-group">
-				        <form:input type="text" class="form-control" placeholder="Search" path="search"></form:input>
-				    </div>
-				    <input type="submit" value="Search" class="btn btn-default" />
-				</form:form>
-				-->
-				<!--Search form end -->
-
 				
 
 

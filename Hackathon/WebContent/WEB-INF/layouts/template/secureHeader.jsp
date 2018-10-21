@@ -61,25 +61,6 @@
 					%>
 				</ul>
 				
-				
-
-				<!--Search form start -->
-				<!-- method="POST" action="search" -->
-				<form:form method="POST" action="${pageContext.request.contextPath}/search/securesearch" modelAttribute="search" class="navbar-form navbar-left" role="search">
-					<div class="input-group">
-				        <form:input type="text" class="form-control" placeholder="Search" path="search"></form:input>
-					    <span class="input-group-btn">
-	                        <input type="submit" value="Search" class="btn btn-default" />
-	                    </span>
-				    </div>
-				</form:form>
-				<!--Search form end -->
-
-				
-
-
-
-
 				<!--the right side of the navbar -->
 				<ul class="nav navbar-nav navbar-right">
 					<!-- Logout link start -->
