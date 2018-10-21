@@ -77,9 +77,21 @@
 			</div>
 		</div>
 		<script>
+			function checkElements() {
+				var x = document.getElementById("viewTable");
+				var y = document.getElementById("newInput");
+				var z = document.getElementById("reportData");
+				var a = document.getElementById("showExportData");
+				
+				x.style.display = "none";
+				y.style.display = "none";
+				z.style.display = "none";
+				a.style.display = "none";
+			}
 			function showViewTable() {
 			    var x = document.getElementById("viewTable");
 			    if (x.style.display === "none") {
+			    	checkElements();
 			        x.style.display = "block";			
 			    } else {
 			        x.style.display = "none";
@@ -88,6 +100,7 @@
 			function showNewInput() {
 			    var x = document.getElementById("newInput");
 			    if (x.style.display === "none") {
+			    	checkElements();
 			        x.style.display = "block";			
 			    } else {
 			        x.style.display = "none";
@@ -96,6 +109,7 @@
 			function showReportData() {
 			    var x = document.getElementById("reportData");
 			    if (x.style.display === "none") {
+			    	checkElements();
 			        x.style.display = "block";			
 			    } else {
 			        x.style.display = "none";
@@ -104,6 +118,7 @@
 			function showExportData() {
 			    var x = document.getElementById("showExportData");
 			    if (x.style.display === "none") {
+			    	checkElements();
 			        x.style.display = "block";			
 			    } else {
 			        x.style.display = "none";
