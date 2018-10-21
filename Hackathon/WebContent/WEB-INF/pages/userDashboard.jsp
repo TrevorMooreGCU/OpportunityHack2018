@@ -1,36 +1,31 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!-- Modal -->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin:0px auto; position:static;">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header" style="background-color:theme-color('dark')">
-			        <h5 class="modal-title" id="exampleModalLabel">Table Title</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			      	
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4">
-			<!-- Will make a button for every table that user has created -->
-			<c:forEach items="${$tableNames}" var="tableName" varStatus="status">					
-				<button type="button" class="btn" data-toggle="modal" data-target="#modalDiscount" onclick="checkElements()">${$tableNames.tableName}</button>
+			<!-- Will make a button for every table that user has created-->
+			<c:forEach items="${tableNames}" var="tableNames" varStatus="status">					
+				<button type="button" class="btn" onclick="checkElements(this)" value="${tableNames.tableName}" style="background-color:#101010;color:#9d9d9d;">${tableNames.tableName}</button>
+				<br>
+				<br>
 			</c:forEach>
+			
 		</div>
 		<div class="col-sm-8">
-			<div class="container" id="viewTable" style="display:none;background-color:">
+		
+		  	
+		  	<div class="container" id="options" style="display:none;">
+		  		<button type="button" class="btn btn-primary" onclick="showViewTable()" data-dismiss="modal">View Table</button>
+		  		
+		  		<button type="button" class="btn btn-primary" onclick="showNewInput()" data-dismiss="modal">New Input</button>
+		  		
+		  		<button type="button" class="btn btn-primary" onclick="showReportData()" data-dismiss="modal">Report Data</button>
+		  		
+		  		<button type="button" class="btn btn-primary" onclick="showExportData()" data-dismiss="modal">Export Data</button>                                                                                                                          
+		  	</div>
+		
+			<div class="container" id="viewTable" style="display:none;">
 			
 				<table>
 					<tr>
@@ -43,7 +38,7 @@
 				<table>
 					<tr>
 						<td>
-							<input type="text" placeholder="New Input">
+							<input id="hidingboi" type="text" placeholder="">
 						</td>
 					</tr>
 				</table>
@@ -60,45 +55,65 @@
 			</div>
 		</div>
 		<script>
-			function checkElements() {
+		
+			var currentTable = '';
+		
+			function checkElements(elmnt) {
+				var m = document.getElementById("options");
 				var x = document.getElementById("viewTable");
 				var y = document.getElementById("newInput");
 				var z = document.getElementById("reportData");
-				var a = document.getElementById("showExportData");
+				var a = document.getElementById("exportData");
 				
+				var h = document.getElementById("hidingboi");
+				
+				m.style.display = "block";
 				x.style.display = "none";
 				y.style.display = "none";
 				z.style.display = "none";
 				a.style.display = "none";
+				
+				currentTable = elmnt.value;
+				
+				h.placeholder = currentTable;
+				
 			}
 			function showViewTable() {
 			    var x = document.getElementById("viewTable");
+			    var m = document.getElementById("options");
 			    if (x.style.display === "none") {
-			        x.style.display = "block";			
+			        x.style.display = "block";
+			        m.style.display = "none";
 			    } else {
 			        x.style.display = "none";
 			    }
 			}
 			function showNewInput() {
 			    var x = document.getElementById("newInput");
+			    var m = document.getElementById("options");
 			    if (x.style.display === "none") {
-			        x.style.display = "block";			
+			        x.style.display = "block";	
+			        m.style.display = "none";
 			    } else {
 			        x.style.display = "none";
 			    }
 			}
 			function showReportData() {
 			    var x = document.getElementById("reportData");
+			    var m = document.getElementById("options");
 			    if (x.style.display === "none") {
-			        x.style.display = "block";			
+			        x.style.display = "block";	
+			        m.style.display = "none";
 			    } else {
 			        x.style.display = "none";
 			    }
 			}
 			function showExportData() {
-			    var x = document.getElementById("showExportData");
+			    var x = document.getElementById("exportData");
+			    var m = document.getElementById("options");
 			    if (x.style.display === "none") {
-			        x.style.display = "block";			
+			        x.style.display = "block";	
+			        m.style.display = "none";
 			    } else {
 			        x.style.display = "none";
 			    }
