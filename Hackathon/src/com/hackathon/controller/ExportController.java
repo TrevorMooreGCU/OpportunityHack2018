@@ -12,14 +12,16 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
+import com.hackathon.model.Book;
+
 @Controller
 @RequestMapping("/export")
 public class ExportController 
 {
 	@RequestMapping(value = "/downloadCSV")
-    public void downloadCSV(HttpServletResponse response) throws IOException 
-	{
-        String csvFileName = "yourfile.csv";
+    public void downloadCSV(HttpServletResponse response) throws IOException {
+ 
+        String csvFileName = "books.csv";
  
         response.setContentType("text/csv");
  
@@ -63,4 +65,44 @@ public class ExportController
         csvWriter.close();
     }
 	
+	
+	/**
+	@RequestMapping(value = "/downloadCSV")
+    public void downloadCSV(HttpServletResponse response) throws IOException 
+	{
+        String csvFileName = "yourfile.csv";
+ 
+        response.setContentType("text/csv");
+ 
+        // creates mock data
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"",
+                csvFileName);
+        response.setHeader(headerKey, headerValue);
+ 
+        //get table name
+        
+        //retrieve columns based off table name
+        
+        //retrieve data based off columns
+ 
+        List<> columnData = Arrays.asList(book1, book2, book3, book4);
+ 
+        // uses the Super CSV API to generate CSV data from the model data
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
+                CsvPreference.STANDARD_PREFERENCE);
+ 
+        String[] header = { "Title", "Description", "Author", "Publisher",
+                "isbn", "PublishedDate", "Price" };
+ 
+        csvWriter.writeHeader(header);
+ 
+        
+        for (Book columnData : listBooks) {
+            csvWriter.write(aBook, header);
+        }
+ 
+        csvWriter.close();
+    }
+	**/
 }
