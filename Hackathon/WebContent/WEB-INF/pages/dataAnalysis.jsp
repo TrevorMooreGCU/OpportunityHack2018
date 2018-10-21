@@ -1,7 +1,7 @@
 
 
 
-<input type="hidden" id="columns" value="${table}">
+<input type="hidden" id="columns" value="${columns}">
 	
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     
@@ -19,7 +19,7 @@
             $.ajax({
                 type: "POST",
                 url: "http://localhost:8080/Hackathon/analyticsservice/analyze",
-                data: { table: "TestDataSet" },
+                data: { table: "Schools" },
                 success: function (json) {
                 	var data = $.parseJSON(json);
                 	for (var x in data) {
@@ -133,9 +133,8 @@
         </div>
         <br />
     </form>
-	<br>
-	<br>
 
+    <h2 id="analysis_header" style="display: block; color: #000000;">Breed vs. Population</h2>
     <div class="charts" style="margin-bottom: 900px;">
         <div style="display: block;">
             <button class="btn btn-info" onclick="ToggleChart(this)">Bar Chart</button>
@@ -201,7 +200,7 @@
                     type: "POST",
                     url: "http://localhost:8080/Hackathon/analyticsservice/analyzeData",
                     data: {
-                    	table: "TestDataSet",
+                    	table: "Schools",
                     	col1: $("#x-axis").val()
                     	//col2: $("#y-axis").val()
                     	},
