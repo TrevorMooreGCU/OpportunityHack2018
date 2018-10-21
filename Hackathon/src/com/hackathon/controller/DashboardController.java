@@ -34,7 +34,7 @@ public class DashboardController {
 			
 			System.out.println("Table names " + tables.size());
 			
-			ModelAndView mav = new ModelAndView("userDashboard");
+			ModelAndView mav = new ModelAndView("NewFile");
 			mav.addObject("tableNames",tables);
 			
 			return mav;

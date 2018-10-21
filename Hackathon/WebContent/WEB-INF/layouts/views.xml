@@ -66,6 +66,9 @@
 	<definition name="dataAnalysis" extends="LoggedInTemplate">
     	<put-attribute name="body" value="/WEB-INF/pages/dataAnalysis.jsp" />
 	</definition>
+	<definition name="NewFile" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/NewFile.jsp" />
+	</definition>
 	
 </tiles-definitions>
 
