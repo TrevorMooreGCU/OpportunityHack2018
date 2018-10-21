@@ -86,7 +86,7 @@ public class DynamicFormController {
 		{
 			try
 			{
-				TableModel table = new TableModel(29, "dogs");
+				TableModel table = new TableModel(33, "Schools");
 		        ModelAndView mav = new ModelAndView("displayData");
 		        
 		        ArrayList<ColumnHeadModel> columnHeaders = new ArrayList<ColumnHeadModel>(tableService.getColumns(table));

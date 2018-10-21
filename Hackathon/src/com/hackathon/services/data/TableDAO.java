@@ -47,16 +47,16 @@ public class TableDAO implements ITableDAO {
 	@Override
 	public ArrayList<ColumnHeadModel> getColumns(TableModel table) 
 	{
-		String query = "SELECT * FROM "+table.getTableName()+"_columns WHERE TABLE_NAME_ID = ?";
+		String query = "SELECT * FROM "+table.getTableName()+"_columns";
 		
-		SqlRowSet srs = jdbcTemplate.queryForRowSet(query, table.getId());
+		SqlRowSet srs = jdbcTemplate.queryForRowSet(query);
 		
 		ArrayList<ColumnHeadModel> columns = new ArrayList<ColumnHeadModel>();
 		
 		while(srs.next()) 
 		{
-			System.out.println(srs.getInt("ID") + srs.getInt("TABLE_NAME_ID") + srs.getString("COLUMN_NAME"));
-			columns.add(new ColumnHeadModel(srs.getInt("ID"),srs.getInt("TABLE_NAME_ID"), srs.getString("COLUMN_NAME")));
+			System.out.println(srs.getInt("ID") + table.getId() + srs.getString("COLUMN_NAME"));
+			columns.add(new ColumnHeadModel(srs.getInt("ID"),table.getId(), srs.getString("COLUMN_NAME")));
 		}
 		
 		return columns;
@@ -65,11 +65,11 @@ public class TableDAO implements ITableDAO {
 	@Override
 	public int getNumberColumns(TableModel table)
 	{
-		String query1 = "SELECT * FROM "+table.getTableName()+"_columns WHERE TABLE_NAME_ID = ?";
-		String query2 = "SELECT * FROM "+table.getTableName()+"_data WHERE TABLE_NAME_ID = ?";
+		String query1 = "SELECT * FROM "+table.getTableName()+"_columns";
+		String query2 = "SELECT * FROM "+table.getTableName()+"_data";
 		
-		SqlRowSet srs1 = jdbcTemplate.queryForRowSet(query1, table.getId());
-		SqlRowSet srs2 = jdbcTemplate.queryForRowSet(query2, table.getId());
+		SqlRowSet srs1 = jdbcTemplate.queryForRowSet(query1);
+		SqlRowSet srs2 = jdbcTemplate.queryForRowSet(query2);
 		
 		int i = 0;
 		while(srs1.next()) 

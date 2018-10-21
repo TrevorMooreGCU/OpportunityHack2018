@@ -1,10 +1,9 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 
 
-<div class="form-horizontal">
-
 <h2>${tableTitle.tableName}</h2>
-
+<div class="containter">
+<div class="form-horizontal table-responsive-sm">
 <table class="table">
 		<thead>
 			<tr>
@@ -31,4 +30,5 @@
 
 </table>
 
+</div>
 </div>
