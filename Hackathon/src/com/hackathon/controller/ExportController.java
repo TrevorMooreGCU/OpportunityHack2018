@@ -3,6 +3,7 @@ package com.hackathon.controller;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -20,6 +21,7 @@ import com.hackathon.model.ColumnHeadModel;
 import com.hackathon.model.TableModel;
 import com.hackathon.services.business.ITableService;
 import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
 
 @Controller
 @RequestMapping("/export")
@@ -108,38 +110,46 @@ public class ExportController
 	    // specified by filepath 
 	    File csvFile = new File(file+".csv"); 
 	    
+	    response.setContentType("text/csv");
+	    
+        // creates mock data
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"",
+        		csvFile);
+        response.setHeader(headerKey, headerValue);
+	    
 	    int numberColumns = tableService.getNumberColumns(table);
         
         ArrayList<ColumnHeadModel> columns = new ArrayList<ColumnHeadModel>(tableService.getColumns(table));
         
         int numberRows = tableService.getNumberRows(table);
-        int i = 0;
+       
 	    
 	    try 
 	    { 
-	        // create FileWriter object with file as parameter 
-	        FileWriter outputfile = new FileWriter(csvFile); 
-	  
-	        // create CSVWriter object filewriter object as parameter 
-	        CSVWriter writer = new CSVWriter(outputfile); 
+	    	CSVWriter writer = new CSVWriter(response.getWriter());
 	        
 	        String[] header = new String[numberColumns];
+	        System.out.println(numberColumns + " this is the columns");
 	        
 	        for(int x = 0; x < numberColumns; x++)
 	        {
 	        	header[x] = columns.get(x).getColumnName();
+	        	System.out.println(header[x] + " these are the headers");
 	        }
 	 
 	        writer.writeNext(header);
-	        
+	        int i = 1;
 	        for(int x = 0; x < numberRows; x++)
 	        {
 	        	String[] rowData = new String[numberColumns];
+	        	
 	        	for(int y = 0; y < numberColumns; y++)
 	        	{
-	        		System.out.println(y);
-	        		System.out.println(i);
-	        		rowData[y] = tableService.getColumnData(i, columns.get(x).getId(), table).getColumnData();
+	        		System.out.println("index: " + y);
+	        		System.out.println("ID " + i + ", columnID: " + y);
+	        		System.out.println(tableService.getColumnData(i, columns.get(y).getId(), table).getColumnData());
+	        		rowData[y] = tableService.getColumnData(i, columns.get(y).getId(), table).getColumnData();
 	        		i++;
 	        	}
 	        	writer.writeNext(rowData);
