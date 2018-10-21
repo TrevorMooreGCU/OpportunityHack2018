@@ -154,7 +154,7 @@ public class UploadController
 			}
 			catch(Exception e)
 			{
-				System.out.println("Database Exception. Caught in Employee Controller.");
+				System.out.println("Database Exception. Caught in Upload Controller.");
 	
 				ModelAndView mav = new ModelAndView("secureError");
 				
