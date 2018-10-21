@@ -5,6 +5,28 @@
 
 <style>
 
+	.charts > div {
+            width: 560px;
+            height: 470px;
+            padding: 0 15px;
+            margin: 5px;
+            border-radius: 10px;
+            background-color: rgb(245, 245, 245);
+            float: left;
+        }
+
+         .charts > div > button {
+             margin-top: 15px;
+         }
+
+         .charts > div > div {
+             margin: 15px 0;
+         }
+
+     h1, h2 {
+         padding-left: 15px;
+     }
+
 	.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
 		  background-color: #696969;
 	}

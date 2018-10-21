@@ -88,6 +88,16 @@ public class DynamicFormController {
 	}
 	
 	
+	@RequestMapping(path="/analysis", method=RequestMethod.GET)
+	public ModelAndView getAnalysis(HttpSession session) 
+	{
+		ModelAndView mav = new ModelAndView("dataAnalysis");
+
+        return mav;
+		
+	}
+	
+	
 	
 	
 	@RequestMapping(path="/getdataset", method=RequestMethod.GET)

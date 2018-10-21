@@ -57,13 +57,14 @@
 	<definition name="displayData" extends="LoggedInTemplate">
     	<put-attribute name="body" value="/WEB-INF/pages/displayData.jsp" />
 	</definition>
-	
 	<definition name="userDashboard" extends="LoggedInTemplate">
     	<put-attribute name="body" value="/WEB-INF/pages/userDashboard.jsp" />
 	</definition>
-	
 	<definition name="dynamicInputForm" extends="LoggedInTemplate">
     	<put-attribute name="body" value="/WEB-INF/pages/dynamicInputForm.jsp" />
+	</definition>
+	<definition name="dataAnalysis" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/dataAnalysis.jsp" />
 	</definition>
 	
 </tiles-definitions>

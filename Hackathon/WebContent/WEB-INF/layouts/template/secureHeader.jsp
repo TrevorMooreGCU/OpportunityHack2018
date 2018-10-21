@@ -68,6 +68,8 @@
 					
 					<li><a href="<c:url value="/dynamic/getdataset" />">Get DataSet</a></li>
 					
+					<li><a href="<c:url value="/dynamic/analysis" />">Analysis</a></li>
+					
 				</ul>
 				
 				
