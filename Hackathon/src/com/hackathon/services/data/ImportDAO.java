@@ -73,8 +73,6 @@ public class ImportDAO implements IImportDAO {
 	public boolean insertColumnData(List<ColumnDataModel> dataValues, String tableName) {
 		// TODO Auto-generated method stub
 		
-		String columnsTableName = tableName + "_columns";
-				
 		tableName = tableName + "_data";
 
 		String createTableQuery = "CREATE TABLE " + tableName + " (" 
