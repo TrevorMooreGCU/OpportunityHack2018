@@ -5,7 +5,7 @@
 <div class="containter">
 <div class="form-horizontal table-responsive-sm">
 <h2>${tableTitle.tableName}</h2>
-<a href="<c:url value="/export/download2?file=${tableTitle.tableName}" />" class="btn btn-default">Download ${tableTitle.tableName}.csv</a>
+<a href="<c:url value="/export/downloadCSV?file=${tableTitle.tableName}" />" class="btn btn-default">Download ${tableTitle.tableName}.csv</a>
 <table class="table">
 		<thead>
 			<tr>
