@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -19,8 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import com.hackathon.model.ColumnDataModel;
+import com.hackathon.model.ColumnHeadModel;
+import com.hackathon.model.SearchModel;
 import com.hackathon.model.TableModel;
 import com.hackathon.services.business.IImportService;
+import com.hackathon.services.business.ITableService;
 
 @Controller
 @RequestMapping("/upload")
@@ -32,6 +37,13 @@ public class UploadController
 	public void setImportService(IImportService service)
 	{
 		this.importService = service;
+	}
+	
+	ITableService tableService;
+	
+	@Autowired
+	public void setTableFormService(ITableService service) {
+		this.tableService = service;
 	}
 
 	@RequestMapping(path="/uploadcsv", method=RequestMethod.GET)
@@ -62,7 +74,7 @@ public class UploadController
 			return mav;
 		}
 
-		session.setAttribute("table" , table.getTableName());
+		session.setAttribute("table" , table);
 		
 		ModelAndView mav = new ModelAndView("csvUpload");
 		
@@ -74,15 +86,13 @@ public class UploadController
 	@RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
 	public ModelAndView uploadFile(ModelMap model, @RequestParam("file") MultipartFile file, HttpServletRequest request, HttpSession session)
 	{
-	 
-		ModelAndView mav = new ModelAndView("displayData");
-		ModelAndView emav = new ModelAndView("secureError");
-		String table = (String) session.getAttribute("table");
+		ModelAndView errmav = new ModelAndView("secureError");
+		TableModel table = (TableModel) session.getAttribute("table");
 		
 	    if (file.isEmpty()) 
 	    {
 	    	System.out.println("Database Exception. Caught in Employee Controller.");
-			return emav;
+			return errmav;
 	    }
 	 
 	    String rootPath = request.getSession().getServletContext().getRealPath("/");
@@ -90,7 +100,8 @@ public class UploadController
 	    if (!dir.exists()) {
 	        dir.mkdirs();
 	    }
-
+	    System.out.println(dir.getAbsolutePath());
+	 
 	    File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
 	    
 	    try {
@@ -104,18 +115,60 @@ public class UploadController
 	            stream.flush();
 	        }
 	    } catch (IOException e) {
-	    	return emav;
+	    	return errmav;
 	    }
 	    
 	    
-	    if(importService.importFile(serverFile, table)) 
-	    	return mav;
+	    if(importService.importFile(serverFile, table.getTableName())) 
+	    {
+	    	try
+			{
+		        ModelAndView mav = new ModelAndView("displayData");
+		        
+		        ArrayList<ColumnHeadModel> columnHeaders = new ArrayList<ColumnHeadModel>(tableService.getColumns(table));
+		        
+		        ArrayList<ArrayList<ColumnDataModel>> columnData = new ArrayList<ArrayList<ColumnDataModel>>();
+		        
+		        int numberColumns = tableService.getNumberColumns(table);
+		        System.out.print(numberColumns);
+		        
+		        int i = 1;
+		        
+		        for(int x = 0; x < numberColumns; x++)
+		        {
+		        	ArrayList<ColumnDataModel> newList = new ArrayList<ColumnDataModel>();
+		        	for(ColumnHeadModel datacolumn : columnHeaders)
+		        	{
+		        		newList.add(tableService.getColumnData(i, datacolumn.getId(), table));
+		        		i++;
+		        	}
+		        	columnData.add(newList);
+		        }
+		
+		        mav.addObject("tableTitle", table);
+		        mav.addObject("columns", columnHeaders);
+		        mav.addObject("datacolumns", columnData);
+	
+		        return mav;
+		        
+			}
+			catch(Exception e)
+			{
+				System.out.println("Database Exception. Caught in Employee Controller.");
+	
+				ModelAndView mav = new ModelAndView("secureError");
+				
+				mav.addObject("search", new SearchModel());
+	
+				return mav;
+			}
+	    }
 	    else
+	    {
+	    	ModelAndView emav = new ModelAndView("secureError");
 	    	return emav;
-	    
-	    
-	 
-	    
+	    }
+
 	}
 	
 }
