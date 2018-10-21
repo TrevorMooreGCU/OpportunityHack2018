@@ -58,6 +58,10 @@
     	<put-attribute name="body" value="/WEB-INF/pages/displayData.jsp" />
 	</definition>
 	
+	<definition name="userDashboard" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/userDashboard.jsp" />
+	</definition>
+	
 </tiles-definitions>
 
 

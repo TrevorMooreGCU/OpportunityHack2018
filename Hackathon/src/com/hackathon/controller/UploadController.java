@@ -90,8 +90,7 @@ public class UploadController
 	    if (!dir.exists()) {
 	        dir.mkdirs();
 	    }
-	    System.out.println(dir.getAbsolutePath());
-	 
+
 	    File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
 	    
 	    try {

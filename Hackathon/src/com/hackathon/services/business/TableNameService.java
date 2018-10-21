@@ -14,7 +14,7 @@ public class TableNameService implements ITableNameService {
 	ITableNamesDAO tableNamesDAO;
 
 	@Autowired
-	public void setSecurityDAO(ITableNamesDAO dao)
+	public void setTableNamesDAO(ITableNamesDAO dao)
 	{
 		this.tableNamesDAO = dao;
 	}

@@ -17,7 +17,7 @@ public class DashboardController {
 	ITableNameService tableNameService;
 
 	@Autowired
-	public void setLoginService(ITableNameService service)
+	public void setTableNameService(ITableNameService service)
 	{
 		this.tableNameService = service;
 	}
@@ -35,6 +35,7 @@ public class DashboardController {
 			
 		}
 		
+		return null;
 	}
 	
 }

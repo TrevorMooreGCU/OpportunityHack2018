@@ -32,7 +32,7 @@ public class TableNamesDAO implements ITableNamesDAO {
 		
 		while(srs.next()) {
 			
-			TableModel table = new TableModel(srs.getString("ID"),srs.getString("TABLE_NAME"));
+			TableModel table = new TableModel(srs.getInt("ID"),srs.getString("TABLE_NAME"));
 			tables.add(table);
 			
 		}

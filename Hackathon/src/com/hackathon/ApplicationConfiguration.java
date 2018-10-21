@@ -13,6 +13,7 @@ import com.hackathon.controller.SearchController;
 import com.hackathon.controller.UploadController;
 import com.hackathon.services.business.ILoginService;
 import com.hackathon.services.business.IRegisterService;
+import com.hackathon.services.business.ITableNameService;
 import com.hackathon.services.business.ITableService;
 import com.hackathon.services.business.ImportService;
 import com.hackathon.services.business.IEmployeeService;
@@ -21,11 +22,13 @@ import com.hackathon.services.business.IImportService;
 import com.hackathon.services.business.LoginService;
 import com.hackathon.services.business.RegisterService;
 import com.hackathon.services.business.TableFormService;
+import com.hackathon.services.business.TableNameService;
 import com.hackathon.services.business.EmployeeService;
 import com.hackathon.services.business.ExportService;
 import com.hackathon.services.data.IRegistrationDAO;
 import com.hackathon.services.data.ISecurityDAO;
 import com.hackathon.services.data.ITableDAO;
+import com.hackathon.services.data.ITableNamesDAO;
 import com.hackathon.services.data.ImportDAO;
 import com.hackathon.services.data.IEmployeeDAO;
 import com.hackathon.services.data.IExportDAO;
@@ -33,6 +36,7 @@ import com.hackathon.services.data.IImportDAO;
 import com.hackathon.services.data.RegistrationDAO;
 import com.hackathon.services.data.SecurityDAO;
 import com.hackathon.services.data.TableDAO;
+import com.hackathon.services.data.TableNamesDAO;
 import com.hackathon.services.data.EmployeeDAO;
 import com.hackathon.services.data.ExportDAO;
 
@@ -114,7 +118,12 @@ public class ApplicationConfiguration
 		{
 			return new TableFormService();
 		}
-		
+		@Bean(name="tableNameService")
+		@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
+		public ITableNameService getTableNameService()
+		{
+			return new TableNameService();
+		}
 		
 		
 		
@@ -157,6 +166,13 @@ public class ApplicationConfiguration
 		public ITableDAO getTableDAO()
 		{
 			return new TableDAO();
+		}
+		
+		@Bean(name="tableNamesDAO")
+		@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
+		public ITableNamesDAO getTableNamesDAO()
+		{
+			return new TableNamesDAO();
 		}
 
 	@Bean(name="dataSource", destroyMethod = "close")
