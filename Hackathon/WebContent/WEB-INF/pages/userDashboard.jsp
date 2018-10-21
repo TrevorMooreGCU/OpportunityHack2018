@@ -16,13 +16,13 @@
 		
 		  	
 		  	<div class="container" id="options" style="display:none;">
-		  		<a href="<c:url value="/dynamic/getdataset?table=${tableNames.tableName}" />"><button type="button" class="btn btn-primary" onclick="showViewTable()" data-dismiss="modal">View Table</button></a>
+		  		<a id="viewTableChange" href="<c:url value="" />"><button type="button" class="btn btn-primary" onclick="showViewTable()" data-dismiss="modal">View Table</button></a>
 		  		
 		  		<button type="button" class="btn btn-primary" onclick="showNewInput()" data-dismiss="modal">New Input</button>
 		  		
-		  		<a href="<c:url value="/dynamic/analysis?table=${tableNames.tableName}" />"><button type="button" class="btn btn-primary" onclick="showReportData()" data-dismiss="modal">Report Data</button></a>
+		  		<a id="reportDataChange" href="<c:url value="" />"><button type="button" class="btn btn-primary" onclick="showReportData()" data-dismiss="modal">Report Data</button></a>
 		  		
-		  		<a href="<c:url value="/export/downloadCSV?file=${tableTitle.tableName}" />"><button type="button" class="btn btn-primary" onclick="showExportData()" data-dismiss="modal">Export Data</button></a>                                                                                                                          
+		  		<a id="exportDataChange" href="<c:url value="" />"><button type="button" class="btn btn-primary" onclick="showExportData()" data-dismiss="modal">Export Data</button></a>                                                                                                                          
 		  	</div>
 		
 			<div class="container" id="viewTable" style="display:none;">
@@ -65,7 +65,10 @@
 				var z = document.getElementById("reportData");
 				var a = document.getElementById("exportData");
 				
-				var h = document.getElementById("hidingboi");
+				var h = document.getElementById("viewTableChange");
+				//var i = document.getElementById("viewTableChange");
+				var d = document.getElementById("reportDataChange");
+				var e = document.getElementById("exportDataChange");
 				
 				m.style.display = "block";
 				x.style.display = "none";
@@ -75,7 +78,10 @@
 				
 				currentTable = elmnt.value;
 				
-				h.placeholder = currentTable;
+				h.value = "/dynamic/getdataset?table=currentTable";
+				d.value = "/dynamic/analysis?table=currentTable";
+				e.value = "/export/downloadCSV?file=currentTable";
+				
 				
 			}
 			function showViewTable() {
