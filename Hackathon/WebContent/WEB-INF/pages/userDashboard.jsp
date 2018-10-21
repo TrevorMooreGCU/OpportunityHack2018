@@ -78,9 +78,9 @@
 				
 				currentTable = elmnt.value;
 				
-				h.value = "/dynamic/getdataset?table=currentTable";
-				d.value = "/dynamic/analysis?table=currentTable";
-				e.value = "/export/downloadCSV?file=currentTable";
+				h.value = "/dynamic/getdataset?table=" + currentTable;
+				d.value = "/dynamic/analysis?table=" + currentTable;
+				e.value = "/export/downloadCSV?file=" + currentTable;
 				
 				
 			}
