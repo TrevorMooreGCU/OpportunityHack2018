@@ -3,6 +3,7 @@
 <%@ page import="java.util.*" %>
 
 
+<<<<<<< HEAD
 <style> 
 
 	table {
@@ -42,6 +43,9 @@
 
 
 <div class="form-horizontal">
+=======
+<div class="form-horizontal" style="overflow-x:scroll;">
+>>>>>>> ccc0e30d103fdbd29c60998c2e2c8ec6480bb94c
 
 <form:form method="POST" action="${pageContext.request.contextPath}/dynamic/addinput" modelAttribute="wrapper">
 
