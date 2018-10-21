@@ -19,6 +19,7 @@ import com.hackathon.model.ColumnDataModel;
 import com.hackathon.model.ColumnHeadModel;
 import com.hackathon.model.TableModel;
 import com.hackathon.services.business.ITableService;
+import com.opencsv.CSVWriter;
 
 @Controller
 @RequestMapping("/export")
@@ -99,6 +100,61 @@ public class ExportController
         csvWriter.close();
     }
 	
+	@RequestMapping(value = "/download2")
+    public void download2(@RequestParam(value = "file", required = false) String file, HttpServletResponse response) throws IOException
+	{
+		TableModel table = new TableModel(0, file);
+		// first create file object for file placed at location 
+	    // specified by filepath 
+	    File csvFile = new File(file+".csv"); 
+	    
+	    int numberColumns = tableService.getNumberColumns(table);
+        
+        ArrayList<ColumnHeadModel> columns = new ArrayList<ColumnHeadModel>(tableService.getColumns(table));
+        
+        int numberRows = tableService.getNumberRows(table);
+        int i = 0;
+	    
+	    try 
+	    { 
+	        // create FileWriter object with file as parameter 
+	        FileWriter outputfile = new FileWriter(csvFile); 
+	  
+	        // create CSVWriter object filewriter object as parameter 
+	        CSVWriter writer = new CSVWriter(outputfile); 
+	        
+	        String[] header = new String[numberColumns];
+	        
+	        for(int x = 0; x < numberColumns; x++)
+	        {
+	        	header[x] = columns.get(x).getColumnName();
+	        }
+	 
+	        writer.writeNext(header);
+	        
+	        for(int x = 0; x < numberRows; x++)
+	        {
+	        	String[] rowData = new String[numberColumns];
+	        	for(int y = 0; y < numberColumns; y++)
+	        	{
+	        		System.out.println(y);
+	        		System.out.println(i);
+	        		rowData[y] = tableService.getColumnData(i, columns.get(x).getId(), table).getColumnData();
+	        		i++;
+	        	}
+	        	writer.writeNext(rowData);
+	        }
+
+	  
+	        // closing writer connection 
+	        writer.close(); 
+	    } 
+	    catch (IOException e) { 
+	        // TODO Auto-generated catch block 
+	        e.printStackTrace(); 
+	    } 
+	}
+	
 	
 	
 	@RequestMapping(value = "/download")
@@ -137,11 +193,10 @@ public class ExportController
 		{
 			fileWriter = new FileWriter(csvFileName);
 
-			Iterator it = columns.iterator();
-			while(it.hasNext())
+			for(int x = 0; x < numberColumns; x++)
 			{
-				ColumnHeadModel e = (ColumnHeadModel)it.next();
-				fileWriter.append(e.getColumnName());
+				fileWriter.append(columns.get(x).getColumnName());
+				System.out.println(columns.get(x).getColumnName());
 				fileWriter.append(COMMA_DELIMITER);
 			}
 			fileWriter.append(LINE_SEPARATOR);
@@ -151,15 +206,12 @@ public class ExportController
 				for(int x = 0; x < numberColumns; x++)
 				{
 					fileWriter.append(columnData.get(y).get(x).getColumnData());
+					System.out.println(columnData.get(y).get(x).getColumnData());
 					fileWriter.append(COMMA_DELIMITER);
 				}
 				fileWriter.append(LINE_SEPARATOR);
 			}
-			
-			
-			
-			
-			
+
 			System.out.println("Write to CSV file Succeeded!!!");
 		}
 		catch(Exception ee)
