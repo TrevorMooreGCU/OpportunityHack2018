@@ -1,14 +1,15 @@
+
+
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4">
 			<!-- Will make a button for every table that user has created -->
+			
 			<button type="button" class="btn" data-toggle="modal" data-target="#modalDiscount">Basic</button>
 			
 		</div>
 	</div>
 </div>
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDiscount">Launch modal</button>
 
 <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger" role="document">
   <!--Content-->
