@@ -3,10 +3,12 @@
 <%@ page import="java.util.*"%>
 
 <style>
-table {
-	border: 0;
-}
 
+
+td {
+
+	border: none !important;
+}
 .table-sbs {
 	display: inline-block;
 	width: 200px;
@@ -16,6 +18,11 @@ table {
 
 tr {
 	height: 60px !important;
+	border: 0;
+}
+
+tbody {
+
 }
 
 .table-container {
@@ -75,12 +82,8 @@ tr {
 					</tbody>
 				</table>
 				<br>
-				<div class="form-group">
-					<div class="col-md-10">
 						<input type="submit" value="Create" class="btn btn-default"
-							style="width: 50%;" />
-					</div>
-				</div>
+							style="width: 50%; margin-bottom: 50px;" />
 
 			</div>
 
