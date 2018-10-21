@@ -33,10 +33,10 @@
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			      	<button type="button" class="btn btn-primary" data-dismiss="modal">View Table</button>
-			      	<button type="button" class="btn btn-primary" data-dismiss="modal">New Input</button>
-			      	<button type="button" class="btn btn-primary" data-dismiss="modal">Report Data</button>
-			      	<button type="button" class="btn btn-primary" data-dismiss="modal">Export Data</button>
+			      	<button type="button" class="btn btn-primary" id="viewTable" data-dismiss="modal">View Table</button>
+			      	<button type="button" class="btn btn-primary" id="newInput" data-dismiss="modal">New Input</button>
+			      	<button type="button" class="btn btn-primary" id="reportData" data-dismiss="modal">Report Data</button>
+			      	<button type="button" class="btn btn-primary" id="exportData" data-dismiss="modal">Export Data</button>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -86,7 +86,7 @@
 			    }
 			}
 			function showNewInput() {
-			    var x = document.getElementById("viewTable");
+			    var x = document.getElementById("newInput");
 			    if (x.style.display === "none") {
 			        x.style.display = "block";			
 			    } else {
@@ -94,7 +94,7 @@
 			    }
 			}
 			function showReportData() {
-			    var x = document.getElementById("viewTable");
+			    var x = document.getElementById("reportData");
 			    if (x.style.display === "none") {
 			        x.style.display = "block";			
 			    } else {
@@ -102,7 +102,7 @@
 			    }
 			}
 			function showExportData() {
-			    var x = document.getElementById("viewTable");
+			    var x = document.getElementById("showExportData");
 			    if (x.style.display === "none") {
 			        x.style.display = "block";			
 			    } else {
