@@ -54,6 +54,9 @@
 	<definition name="createTable" extends="LoggedInTemplate">
     	<put-attribute name="body" value="/WEB-INF/pages/createTable.jsp" />
 	</definition>
+	<definition name="displayData" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/displayData.jsp" />
+	</definition>
 	
 </tiles-definitions>
 
