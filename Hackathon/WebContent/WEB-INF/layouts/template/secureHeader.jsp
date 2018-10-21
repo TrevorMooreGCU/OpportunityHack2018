@@ -64,6 +64,8 @@
 					
 					<li><a href="<c:url value="/export/downloadCSV" />">Download CSV</a></li>
 					
+					<li><a href="<c:url value="/dynamic/getdataset" />">Get DataSet</a></li>
+					
 				</ul>
 				
 				

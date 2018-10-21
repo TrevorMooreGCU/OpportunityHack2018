@@ -62,6 +62,20 @@ public class TableDAO implements ITableDAO {
 	}
 	
 	@Override
+	public int getNumberColumns(TableModel table)
+	{
+		String query = "SELECT * FROM "+table.getTableName()+"_columns WHERE TABLE_NAME_ID = ?";
+		
+		SqlRowSet srs = jdbcTemplate.queryForRowSet(query, table.getId());
+		
+		int i = 0;
+		while(srs.next()) 
+			i++;
+		
+		return i;
+	}
+	
+	@Override
 	public ArrayList<ColumnDataModel>getColumnData(int id, TableModel table)
 	{
 		String query = "SELECT * FROM "+table.getTableName()+"_data WHERE COLUMN_NAME_ID = ?";
