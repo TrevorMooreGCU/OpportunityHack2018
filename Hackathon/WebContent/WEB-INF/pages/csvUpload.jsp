@@ -1,4 +1,25 @@
+<style>
+.loader {
+  border: 8px solid #f3f3f3;
+  border-radius: 100%;
+  border-top: 8px solid #3498db;
+  width: 30px;
+  height: 30px;
+  -webkit-animation: spin 2s ease-out infinite; /* Safari */
+  animation: spin 2s ease-out infinite;
+}
 
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
 
 <form action="${pageContext.request.contextPath}/upload/uploadfile" method="POST" enctype="multipart/form-data">
 
@@ -20,7 +41,7 @@
 	<br>
 	
 	<div class="input-group">
-		<input type="submit" value="Upload" class="btn btn-default" />
+		<input type="submit" value="Upload" class="btn btn-default" /><div class="loader" id="spinner" style="display:none;"></div>
 	</div>
 	
 	
@@ -64,5 +85,16 @@ $(function() {
 	  
 	});
 
+</script>
+
+<script>
+function showSpinner() {
+    var x = document.getElementById("spinner");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 </script>
 
