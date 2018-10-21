@@ -41,7 +41,7 @@
 	<br>
 	
 	<div class="input-group">
-		<input type="submit" value="Upload" class="btn btn-default" /><div class="loader" id="spinner" style="display:none;"></div>
+		<input type="submit" onClick="showSpinner()" value="Upload" class="btn btn-default" /><div class="loader" id="spinner" style="display:none;"></div>
 	</div>
 	
 	
