@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
@@ -13,9 +14,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.hackathon.model.ColumnDataModel;
 import com.hackathon.model.ColumnHeadModel;
+import com.hackathon.model.EmployeeModel;
 
 public class ImportDAO implements IImportDAO {
 
@@ -109,27 +112,65 @@ public class ImportDAO implements IImportDAO {
 		return true;
 	}
 
-	/*
-	 * String sql = "INSERT INTO " + "MY_TABLE " + "(FIELD_1,FIELD_2,FIELD_3) " +
-	 * "VALUES " + "(?,?,?)";
-	 * 
-	 * getJdbcTemplate().batchUpdate(sql, new BatchPreparedStatementSetter() {
-	 * 
-	 * @Override public void setValues(PreparedStatement ps, int i) throws
-	 * SQLException {
-	 * 
-	 * MyPojo myPojo = myPojoList.get(i); ps.setString(1, myPojo.getField1());
-	 * ps.setString(2, myPojo.getField2()); ps.setString(3, myPojo.getField3());
-	 * 
-	 * }
-	 * 
-	 * @Override public int getBatchSize() { return myPojoList.size(); } });
-	 */
+	public boolean containsReservedWord(String tableName) {
+		
+		String query = "SELECT * FROM nod3eke2u33fhtk2.reserved_keywords WHERE UPPER(KEYWORD) LIKE ?";
+		
+		tableName = "%" + tableName.toUpperCase() + "%";
+
+		int result = 0;
+		
+		try {
+			result = jdbcTemplate.queryForObject(query, new Object[] {tableName}, Integer.class);
+			
+			return (result > 0);
+		} catch (Exception e) {
+
+		}
+
+		return false;
+		
+		
+	}
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
+
+	
+	
+
+	@Override
+	public boolean tableNameExists(String table) {
+		
+		String query = "SELECT * FROM nod3eke2u33fhtk2.tablenametable WHERE TABLE_NAME = ?";
+		
+		int result = 0;
+		
+		try {
+			result = jdbcTemplate.queryForObject(query, new Object[] {table}, Integer.class);
+			
+			return (result > 0);
+		} catch (Exception e) {
+
+		}
+
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

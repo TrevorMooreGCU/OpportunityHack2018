@@ -66,13 +66,16 @@ public class UploadController
 	@RequestMapping(path="/adddataset", method=RequestMethod.POST)
 	public ModelAndView createTable(@Valid @ModelAttribute("table") TableModel table, BindingResult result, HttpSession session)
 	{
-		if(result.hasErrors())
+		if(result.hasErrors() || !importService.validTableName(table.tableName))
 		{
 			ModelAndView mav = new ModelAndView("createTable");
 			mav.addObject("table", table);
+			mav.addObject("message", "Table name is either taken, contains spaces, contains non alpha-numeric characters, or a sql reserved keyword.");
 
 			return mav;
 		}
+		
+		
 
 		session.setAttribute("table" , table);
 		

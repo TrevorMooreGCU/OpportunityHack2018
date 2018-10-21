@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -48,6 +50,9 @@ public class ImportService implements IImportService
 		//parse rows
 		//add to list of models
 		//insert to column data table with column name id relating to id above
+		
+		
+		
 		
 		List<String[]> rawRows;
 		
@@ -109,7 +114,40 @@ public class ImportService implements IImportService
 		
 		
 	}
-	
-	
+
+	@Override
+	public boolean validTableName(String name) {
+		
+		//check for spaces, check for reserved words, check for alphabetical or numbers
+		
+		boolean hasSpaces = name.contains(" ");
+		System.out.println("0");
+		if (!hasSpaces) {
+			System.out.println("1");
+			String regex = "^[a-zA-Z0-9]+$";
+			Pattern pattern = Pattern.compile(regex);
+			Matcher matcher = pattern.matcher(name);
+			
+			boolean hasInvalidCharacters = !matcher.matches();
+			
+			if (!hasInvalidCharacters) {
+				System.out.println("2");
+				boolean hasKeywords = importDAO.containsReservedWord(name);
+				
+				if (!hasKeywords) {
+					System.out.println("3");
+					boolean tableNameExists = importDAO.tableNameExists(name);
+					
+					if (!tableNameExists) {
+						System.out.println("4");
+						return true;
+					}
+
+				}
+			}
+		}
+		return false;
+	}
+
 	
 }

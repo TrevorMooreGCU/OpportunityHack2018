@@ -12,6 +12,8 @@ public interface IImportService
 
 	public boolean importFile(File file, String table);
 
+	public boolean validTableName(String name);
+	
 	
 	
 	
