@@ -26,17 +26,17 @@
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
-			      <div class="modal-header" style="background-color:0,0,0,.6">
+			      <div class="modal-header" style="background-color:theme-color('dark')">
 			        <h5 class="modal-title" id="exampleModalLabel">Table Title</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			      	<button type="button" class="btn btn-primary" id="viewTable" data-dismiss="modal">View Table</button>
-			      	<button type="button" class="btn btn-primary" id="newInput" data-dismiss="modal">New Input</button>
-			      	<button type="button" class="btn btn-primary" id="reportData" data-dismiss="modal">Report Data</button>
-			      	<button type="button" class="btn btn-primary" id="exportData" data-dismiss="modal">Export Data</button>
+			      	<button type="button" class="btn btn-primary" onclick="showViewTable" data-dismiss="modal">View Table</button>
+			      	<button type="button" class="btn btn-primary" onclick="showNewInput" data-dismiss="modal">New Input</button>
+			      	<button type="button" class="btn btn-primary" onclick="showReportData" data-dismiss="modal">Report Data</button>
+			      	<button type="button" class="btn btn-primary" onclick="showExportData" data-dismiss="modal">Export Data</button>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -47,7 +47,7 @@
 			  
 		</div>
 		<div class="col-sm-8">
-			<div class="container" id="viewTable">
+			<div class="container" id="viewTable" style="display:none;background-color:">
 			
 				<table>
 					<tr>
@@ -56,7 +56,7 @@
 				</table>
 			
 			</div>
-			<div class="container" id="newInput">
+			<div class="container" id="newInput" style="display:none;">
 				<table>
 					<tr>
 						<td>
@@ -65,14 +65,14 @@
 					</tr>
 				</table>
 			</div>
-			<div class="container" id="reportData">
+			<div class="container" id="reportData" style="display:none;">
 				<table>
 					<tr>
 						<th>Report Data</th>
 					</tr>
 				</table>
 			</div>
-			<div class="container" id="exportData">
+			<div class="container" id="exportData" style="display:none;">
 				<button>Export Data</button>
 			</div>
 		</div>

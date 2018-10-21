@@ -5613,13 +5613,14 @@ body.modal-open,
 .modal {
   position: fixed;
   top: 50%;
-  /*right: 0;
-  bottom: 0;*/
+  right: 0;
+  bottom: 0;
   left: 50%;
   z-index: 1040;
   display: none;
   overflow: auto;
   overflow-y: scroll;
+  padding-right: 45px;
 }
 
 .modal.fade .modal-dialog {
