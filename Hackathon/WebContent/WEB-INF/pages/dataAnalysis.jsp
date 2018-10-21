@@ -24,9 +24,9 @@
                 	var data = $.parseJSON(json);
                 	for (var x in data) {
                 		$("#x-axis").append('<option value="' + data[x].id + '">' + data[x].columnName + '</option>');
-                		$("#y-axis").append('<option value="O' + data[x].id + '">' + data[x].columnName + ' (Occurences)</option>');
+                		$("#y-axis").append('<option value="' + data[x].id + '">' + data[x].columnName + ' (Occurences)</option>');
                 		//if (data[x].columnType == "number")
-                		//	$("#y-axis").append('<option value="N' + data[x].id + '">' + data[x].columnName + ' (Number)</option>');
+                		//	$("#y-axis").append('<option value="' + data[x].id + '">' + data[x].columnName + ' (Number)</option>');
                 	}
                 },
                 error: function() {
@@ -194,41 +194,22 @@
             }
         }
 
-        function determineChart(event) {
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/Hackathon/analyticsservice/analyze",
-                data: { table: "Schools" },
-                success: function (json) {
-                	var data = $.parseJSON(json);
-                	for (var x in data) {
-                		$("#x-axis").append('<option value="' + data[x].id + '">' + data[x].columnName + '</option>');
-                		$("#y-axis").append('<option value="O' + data[x].id + '">' + data[x].columnName + ' (Occurences)</option>');
-                		//if (data[x].columnType == "number")
-                		//	$("#y-axis").append('<option value="N' + data[x].id + '">' + data[x].columnName + ' (Number)</option>');
-                	}
-                },
-                error: function() {
-                	alert("error");
-                },
-                dataType: 'text'
-            });
             
-            function determineChart(event) {
+       function determineChart(event) {
                 $.ajax({
                     type: "POST",
                     url: "http://localhost:8080/Hackathon/analyticsservice/analyzeData",
                     data: {
                     	table: "Schools",
-                    	col1: $("#x-axis").val(), 
-                    	col2: $("#y-axis").val()
+                    	col1: $("#x-axis").val()
+                    	//col2: $("#y-axis").val()
                     	},
-                    }
                     success: function (json) {
                     	var data = $.parseJSON(json);
+                    	alert(json);
                     	for (var x in data) {
                     		$("#x-axis").append('<option value="' + data[x].id + '">' + data[x].columnName + '</option>');
-                    		$("#y-axis").append('<option value="O' + data[x].id + '">' + data[x].columnName + ' (Occurences)</option>');
+                    		$("#y-axis").append('<option value="' + data[x].id + '">' + data[x].columnName + ' (Occurences)</option>');
                     		//if (data[x].columnType == "number")
                     		//	$("#y-axis").append('<option value="N' + data[x].id + '">' + data[x].columnName + ' (Number)</option>');
                     	}
