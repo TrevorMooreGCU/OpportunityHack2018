@@ -23,7 +23,7 @@ import com.hackathon.model.TableModel;
 import com.hackathon.services.business.ITableService;
 
 @Controller
-@RequestMapping("form")
+@RequestMapping("/dynamic")
 public class DynamicFormController {
 	
 	ITableService tableService;
@@ -76,13 +76,17 @@ public class DynamicFormController {
 	
 	
 	
+	
+	
+	
 	@RequestMapping(path="/getdataset", method=RequestMethod.GET)
-	public ModelAndView getDataSet(HttpSession session, TableModel table) {
+	public ModelAndView getDataSet(HttpSession session) {
 		
 		if(session != null && session.getAttribute("admin") != null)
 		{
 			try
 			{
+				TableModel table = new TableModel(24, "Dogs");
 		        ModelAndView mav = new ModelAndView("displayData");
 		        
 		        ArrayList<ColumnHeadModel> columnHeaders = new ArrayList<ColumnHeadModel>(tableService.getColumns(table));
