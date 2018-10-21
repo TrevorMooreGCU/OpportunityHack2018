@@ -13,6 +13,13 @@ public class ColumnDataModel {
 		this.columnData = columnData;
 		this.tableNameId = tableNameId;
 	}
+	
+	public ColumnDataModel() {
+		this.id = 0;
+		this.columnNameId = 0;
+		this.columnData = "";
+		this.tableNameId = 0;
+	}
 
 	public int getId() {
 		return id;

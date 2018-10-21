@@ -62,6 +62,10 @@
     	<put-attribute name="body" value="/WEB-INF/pages/userDashboard.jsp" />
 	</definition>
 	
+	<definition name="dynamicInputForm" extends="LoggedInTemplate">
+    	<put-attribute name="body" value="/WEB-INF/pages/dynamicInputForm.jsp" />
+	</definition>
+	
 </tiles-definitions>
 
 

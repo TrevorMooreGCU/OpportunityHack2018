@@ -146,7 +146,43 @@ public class ImportDAO implements IImportDAO {
 
 		return srs.next();
 	}
+
+	@Override
+	public List<ColumnHeadModel> getColumnNames(String tableName) {
+		
+		tableName = tableName + "_columns";
+		
+		List<ColumnHeadModel> columns = new ArrayList<ColumnHeadModel>();
+		
+		String query = "SELECT * FROM nod3eke2u33fhtk2."+tableName;
+		
+		SqlRowSet srs = jdbcTemplate.queryForRowSet(query);
+		
+		//id, tableid, columnname
+		while(srs.next()) {
+			columns.add(new ColumnHeadModel(srs.getInt("ID"), 0, srs.getString("COLUMN_NAME")));
+		}
+		
+		System.out.println("column names count: "+columns.size());
+		
+		return columns;
+	}
+
+	@Override
+	public boolean insertColumnDataModel(ColumnDataModel model, String tableName) {
+		// TODO Auto-generated method stub
+		
+		tableName = tableName + "_data";
+		
+		String query = "INSERT INTO nod3eke2u33fhtk2." + tableName + " " + "(COLUMN_DATA, COLUMN_ID) " + "VALUES " + "(?, ?)";
+
+		int result = jdbcTemplate.update(query, model.columnData, model.columnNameId);
+		System.out.println("insert: "+query);
 	
+		return result > 0;
+	}
+
+
 	
 	
 	

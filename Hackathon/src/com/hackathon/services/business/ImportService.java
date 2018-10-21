@@ -145,5 +145,32 @@ public class ImportService implements IImportService
 		return false;
 	}
 
+	@Override
+	public boolean createInput(List<ColumnDataModel> inputValues, String tableName) {
+		// TODO Auto-generated method stub
+		
+		//get column names from column names table (row count)
+		
+		int columnRowCount = importDAO.getColumnNames(tableName).size();
+		
+		if (columnRowCount == inputValues.size()) {
+
+			for (int i = 1; i <= columnRowCount; i++) {
+				ColumnDataModel inputValue = inputValues.get(i-1);
+				inputValue.setColumnNameId(i);
+				
+				importDAO.insertColumnDataModel(inputValue, tableName);
+			}
+
+		}
+		
+		return false;
+	}
+
+	
+	
+	
+	
+	
 	
 }
