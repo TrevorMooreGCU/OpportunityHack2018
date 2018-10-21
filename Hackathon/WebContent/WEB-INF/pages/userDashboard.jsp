@@ -12,19 +12,7 @@
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			      	<button type="button" class="btn btn-primary" onclick="showViewTable()" data-dismiss="modal">View Table</button>
 			      	
-			      	<form:form method="GET" action="dynamic/displayInputForm" modelAttribute="TableModel">
-			      	<form:input type="hidden" id="NewInput" value=""/>
-			      	<button type="button" class="btn btn-primary" onclick="showNewInput()" data-dismiss="modal">New Input</button>
-			      	</form:form>
-			      	
-			      	<button type="button" class="btn btn-primary" onclick="showReportData()" data-dismiss="modal">Report Data</button>
-			      	
-			      	<form:form method="GET" action="export/downloadCSV" modelAttribute="TableModel">
-			      	<form:input type="hidden" id="ExportData" value=""/>
-			      	<button type="button" class="btn btn-primary" onclick="showExportData()" data-dismiss="modal">Export Data</button>
-			      	</form:form>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

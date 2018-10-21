@@ -60,11 +60,13 @@
 						}
 					%>
 					
-					<li><a href="<c:url value="/dashboard/main" />">Dashboard</a></li>
-					
-					<li><a href="<c:url value="/upload/uploadtable" />">Upload Data</a></li>
-					
-					<li><a href="<c:url value="/export/downloadCSV" />">Download CSV</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dashboard <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="<c:url value="/dashboard/main" />">View Data Sets</a></li>
+							<li><a href="<c:url value="/upload/uploadtable" />">Upload Data Set</a></li>
+						</ul>
+					</li>
 					
 					<li><a href="<c:url value="/dynamic/getdataset" />">Get DataSet</a></li>
 					

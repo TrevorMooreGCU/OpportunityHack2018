@@ -25,7 +25,7 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <img src="${pageContext.request.contextPath}/resources/images/image3.1.jpg" style="height: 80%; width:100%">
+      <img src="${pageContext.request.contextPath}/resources/images/image3.1.jpg" style="width:100%">
       <div class="carousel-caption">
       	<h1>Welcome to our Hackathon App!</h1>
           <p>The root for all your business needs.</p>
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="item">
-      <img src="${pageContext.request.contextPath}/resources/images/image1.1.jpg" style="height: 80%;width:100%">
+      <img src="${pageContext.request.contextPath}/resources/images/image1.1.jpg" style="width:100%">
       <div class="carousel-caption">
       	<h1>Explore!</h1>
           <p>Feel free to browse our app and enjoy all our content.</p>
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="item">
-      <img src="${pageContext.request.contextPath}/resources/images/image2.1.jpg" style="height: 80%;width:100%">
+      <img src="${pageContext.request.contextPath}/resources/images/image2.1.jpg" style="width:100%">
       <div class="carousel-caption">
       	<h1>Sign Up and Get Started!</h1>
           <p>Register and login to to get started!</p>

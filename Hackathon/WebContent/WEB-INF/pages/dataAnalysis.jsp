@@ -1,4 +1,4 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+
 
 
 <input type="hidden" id="columns" value="${columns}">
@@ -13,27 +13,29 @@
             'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
         });
         google.charts.setOnLoadCallback(drawStuff);
-        
-        var listForJavascript = [];
-        <c:forEach items="${columns}" var="column">
-          var arr = [];
 
-          arr.push("<c:out value="${column.columnName}" />");
+        function loadJSON() {
 
-          listForJavascript.push(arr);
-        </c:forEach>
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/Hackathon/analyticsservice/analyze",
+                data: { table: "Schools" },
+                success: function (json) {
+                	var data = $.parseJSON(json);
+                	for (var x in data) {
+                		$("#x-axis").append('<option value="' + data[x].id + '">' + data[x].columnName + '</option>');
+                		$("#y-axis").append('<option value="O' + data[x].id + '">' + data[x].columnName + ' (Occurences)</option>');
+                		//if (data[x].columnType == "number")
+                		//	$("#y-axis").append('<option value="N' + data[x].id + '">' + data[x].columnName + ' (Number)</option>');
+                	}
+                },
+                error: function() {
+                	alert("error");
+                },
+                dataType: 'text'
+            });
 
-        function drawStuff(Wide, Hide, chart) {
-            if (Wide == undefined) {
-                Wide = 530;
-                Hide = 400;
-            }
-
-            
-            
-            
-
-            var data = new google.visualization.arrayToDataTable([
+            return new google.visualization.arrayToDataTable([
                 ["Breed", "Adopted Dogs"],
                 ["doggo", 23],
                 ["woofer", 58],
@@ -42,6 +44,16 @@
                 ["sub-Woofer", 38],
                 ["pupper", 27]
             ]);
+        }
+        
+        
+        function drawStuff(Wide, Hide, chart) {
+            if (Wide == undefined) {
+                Wide = 530;
+                Hide = 400;
+            }
+
+            var data = loadJSON();
 
             var country_data = new google.visualization.arrayToDataTable([
                 ["Countries", "Adopted Dogs"],
@@ -106,23 +118,14 @@
 
 <body class="container">
     <h1 style="color: #000000;">Data Analysis</h1>
+
     <form onsubmit="determineChart(event)">
         <div class="col-lg-4">
             <select id="x-axis" class="form-control">
-                <option value="X">x-value</option>
-                <option value="Xstring">X-string</option>
-                <option value="Xint">X-int</option>
-                <option value="Xlocation">X-location</option>
-                <option value="Xall">x-all</option>
             </select>
         </div>
         <div class="col-lg-4">
             <select id="y-axis" class="form-control">
-                <option value="Y">y-value</option>
-                <option value="Ystring">Y-string</option>
-                <option value="Yint">Y-int</option>
-                <option value="Ylocation">Y-location</option>
-                <option value="Yall">y-all</option>
             </select>
         </div>
         <div class="col-offset-lg-2 col-lg-2">
@@ -130,21 +133,22 @@
         </div>
         <br />
     </form>
-    <h2 id="analysis_header" style="display: none; color: #000000;">Breed vs. Population</h2>
-    <div class="charts">
-        <div style="display: none;">
+
+    <h2 id="analysis_header" style="display: block; color: #000000;">Breed vs. Population</h2>
+    <div class="charts" style="margin-bottom: 900px;">
+        <div style="display: block;">
             <button class="btn btn-info" onclick="ToggleChart(this)">Bar Chart</button>
             <div id="bar_chart"></div>
         </div>
-        <div style="display: none;">
+        <div style="display: block;">
             <button class="btn btn-info" onclick="ToggleChart(this)">Pie Chart</button>
             <div id="pie_chart"></div>
         </div>
-        <div style="display: none;">
+        <div style="display: block;">
             <button class="btn btn-info" onclick="ToggleChart(this)">Curve Chart</button>
             <div id="curve_chart"></div>
         </div>
-        <div style="display: none;">
+        <div style="display: block;">
             <button class="btn btn-info" onclick="ToggleChart(this)">Regions Graph</button>
             <div id="regions_chart"></div>
         </div>
@@ -182,15 +186,59 @@
                 document.getElementById("regions_chart").parentElement.style.display = "block";
             }
             else {
-                document.getElementById("analysis_header").style.display = "none";
-                document.getElementById("bar_chart").parentElement.style.display = "none";
-                document.getElementById("pie_chart").parentElement.style.display = "none";
-                document.getElementById("curve_chart").parentElement.style.display = "none";
-                document.getElementById("regions_chart").parentElement.style.display = "none";
+                document.getElementById("analysis_header").style.display = "block";
+                document.getElementById("bar_chart").parentElement.style.display = "block";
+                document.getElementById("pie_chart").parentElement.style.display = "block";
+                document.getElementById("curve_chart").parentElement.style.display = "block";
+                document.getElementById("regions_chart").parentElement.style.display = "block";
             }
         }
 
         function determineChart(event) {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/Hackathon/analyticsservice/analyze",
+                data: { table: "Schools" },
+                success: function (json) {
+                	var data = $.parseJSON(json);
+                	for (var x in data) {
+                		$("#x-axis").append('<option value="' + data[x].id + '">' + data[x].columnName + '</option>');
+                		$("#y-axis").append('<option value="O' + data[x].id + '">' + data[x].columnName + ' (Occurences)</option>');
+                		//if (data[x].columnType == "number")
+                		//	$("#y-axis").append('<option value="N' + data[x].id + '">' + data[x].columnName + ' (Number)</option>');
+                	}
+                },
+                error: function() {
+                	alert("error");
+                },
+                dataType: 'text'
+            });
+            
+            function determineChart(event) {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/Hackathon/analyticsservice/analyzeData",
+                    data: {
+                    	table: "Schools",
+                    	col1: $("#x-axis").val(), 
+                    	col2: $("#y-axis").val()
+                    	},
+                    }
+                    success: function (json) {
+                    	var data = $.parseJSON(json);
+                    	for (var x in data) {
+                    		$("#x-axis").append('<option value="' + data[x].id + '">' + data[x].columnName + '</option>');
+                    		$("#y-axis").append('<option value="O' + data[x].id + '">' + data[x].columnName + ' (Occurences)</option>');
+                    		//if (data[x].columnType == "number")
+                    		//	$("#y-axis").append('<option value="N' + data[x].id + '">' + data[x].columnName + ' (Number)</option>');
+                    	}
+                    },
+                    error: function() {
+                    	alert("error");
+                    },
+                    dataType: 'text'
+                });
+        	
             var x = document.getElementById("x-axis");
             var elem = x.options[x.selectedIndex].value;
 

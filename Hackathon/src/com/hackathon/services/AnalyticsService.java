@@ -34,14 +34,13 @@ public class AnalyticsService
 	
 	
 	@RequestMapping("/analyze")
-    public ModelAndView handleRequest(@RequestParam(value = "table", required = false) String table, HttpServletRequest arg0, HttpServletResponse arg1, HttpSession session) throws Exception 
+    public String analyzeColumns(@RequestParam(value = "table", required = false) String table, HttpServletRequest arg0, HttpServletResponse arg1, HttpSession session) throws Exception 
 	{
 		if(session != null && session.getAttribute("admin") != null)
 		{
 			try
 			{
 				TableModel tm = new TableModel(0, table);
-		        ModelAndView mav = new ModelAndView("dataAnalysis");
 		        
 		        ArrayList<ColumnHeadModel> columnHeaders = new ArrayList<ColumnHeadModel>(tableService.getColumns(tm));
 		        
@@ -64,13 +63,8 @@ public class AnalyticsService
 		        }
 		        
 		        Gson gson1 = new Gson();
-		        Gson gson2 = new Gson();
-		
-		        mav.addObject("tableTitle", table);
-		        mav.addObject("columns", gson1.toJson(columnHeaders));
-		        mav.addObject("datacolumns", gson2.toJson(columnData));
-	
-		        return mav;
+		        
+		        return gson1.toJson(columnHeaders);
 			}
 			catch(Exception e)
 			{
@@ -79,8 +73,7 @@ public class AnalyticsService
 				ModelAndView mav = new ModelAndView("secureError");
 				
 				mav.addObject("search", new SearchModel());
-	
-				return mav;
+
 			}
 	    }
 		else
@@ -91,7 +84,66 @@ public class AnalyticsService
 			mav.addObject("register", new RegisterModel());
 			mav.addObject("search", new SearchModel());
 			
-			return mav;
+			return null;
 		}
+		return null;
+    }
+	
+	
+	
+	@RequestMapping("/analyzeData")
+    public String analyzeData(@RequestParam(value = "table", required = false) String table, HttpServletRequest arg0, HttpServletResponse arg1, HttpSession session) throws Exception 
+	{
+		if(session != null && session.getAttribute("admin") != null)
+		{
+			try
+			{
+				TableModel tm = new TableModel(0, table);
+		        
+		        ArrayList<ColumnHeadModel> columnHeaders = new ArrayList<ColumnHeadModel>(tableService.getColumns(tm));
+		        
+		        ArrayList<ArrayList<ColumnDataModel>> columnData = new ArrayList<ArrayList<ColumnDataModel>>();
+		        
+		        int numberColumns = tableService.getNumberRows(tm);
+		        System.out.print(numberColumns);
+		        
+		        int i = 1;
+		        
+		        for(int x = 0; x < numberColumns; x++)
+		        {
+		        	ArrayList<ColumnDataModel> newList = new ArrayList<ColumnDataModel>();
+		        	for(ColumnHeadModel datacolumn : columnHeaders)
+		        	{
+		        		newList.add(tableService.getColumnData(i, datacolumn.getId(), tm));
+		        		i++;
+		        	}
+		        	columnData.add(newList);
+		        }
+		        
+		        Gson gson1 = new Gson();
+		        
+		        return gson1.toJson(columnData);
+			}
+			catch(Exception e)
+			{
+				System.out.println("Database Exception. Caught in Employee Controller.");
+	
+				ModelAndView mav = new ModelAndView("secureError");
+				
+				mav.addObject("search", new SearchModel());
+
+			}
+	    }
+		else
+		{
+			ModelAndView mav = new ModelAndView("registerUser");
+			
+			mav.addObject("login", new CredentialModel());
+			mav.addObject("register", new RegisterModel());
+			mav.addObject("search", new SearchModel());
+			
+			return null;
+		}
+		return null;
     }
 }

@@ -3,7 +3,7 @@
 <%@ page import="java.util.*" %>
 
 
-<div class="form-horizontal">
+<div class="form-horizontal" style="overflow-x:scroll;">
 <div class="container">
 	<div class="row">
         <div class="col-md-6">

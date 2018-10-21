@@ -55,14 +55,14 @@
 	.form-horizontal {
 		min-height: 70%;
 		width: 100%;
-		padding: 19px;
+		padding: 10px;
 		position: relative;
 		
 		background: rgba(0, 0, 0, 0.6);
-		margin-bottom: 80px;
+		margin-bottom: 60px;
 		padding-bottom: 20px;
 		border: 1px solid #464646;
-		border-radius: 4px;
+		border-radius: 2px;
 		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 	}

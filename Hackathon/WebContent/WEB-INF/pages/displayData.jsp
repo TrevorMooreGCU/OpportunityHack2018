@@ -3,9 +3,9 @@
 
 
 <div class="containter">
-<div class="form-horizontal table-responsive-sm">
+<div class="form-horizontal table-responsive-sm" style="overflow-x:scroll;">
 <h2>${tableTitle.tableName}</h2>
-<a href="<c:url value="/export/downloadCSV?file=${tableTitle.tableName}" />" class="btn btn-default">Download ${tableTitle.tableName}.csv</a>
+
 <table class="table">
 		<thead>
 			<tr>
@@ -31,6 +31,6 @@
 </c:forEach>
 
 </table>
-
+<a href="<c:url value="/export/downloadCSV?file=${tableTitle.tableName}" />" class="btn btn-default">Download ${tableTitle.tableName}.csv</a>
 </div>
 </div>
