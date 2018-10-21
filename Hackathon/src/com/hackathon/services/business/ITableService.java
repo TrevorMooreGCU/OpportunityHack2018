@@ -11,10 +11,10 @@ public interface ITableService {
 
 	public List<ColumnHeadModel> tableForm(TableModel table);
 	
-	public List<ColumnHeadModel> getColumns(TableModel table);
+	public ArrayList<ColumnHeadModel> getColumns(TableModel table);
 	
 	public int getNumberColumns(TableModel table);
 	
-	public ArrayList<ColumnDataModel>getColumnData(int id, TableModel table);
+	public ColumnDataModel getColumnData(int id, int columnid, TableModel table);
 	
 }

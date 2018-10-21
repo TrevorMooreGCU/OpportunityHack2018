@@ -86,18 +86,27 @@ public class DynamicFormController {
 		{
 			try
 			{
-				TableModel table = new TableModel(24, "Dogs");
+				TableModel table = new TableModel(29, "dogs");
 		        ModelAndView mav = new ModelAndView("displayData");
 		        
 		        ArrayList<ColumnHeadModel> columnHeaders = new ArrayList<ColumnHeadModel>(tableService.getColumns(table));
 		        
 		        ArrayList<ArrayList<ColumnDataModel>> columnData = new ArrayList<ArrayList<ColumnDataModel>>();
 		        
-		        int i = 0;
-		        for(ColumnHeadModel column : columnHeaders)
+		        int numberColumns = tableService.getNumberColumns(table);
+		        System.out.print(numberColumns);
+		        
+		        int i = 1;
+		        
+		        for(int x = 0; x < numberColumns; x++)
 		        {
-		        	columnData.add(new ArrayList<ColumnDataModel>(tableService.getColumnData(column.getId(), table)));
-		        	i++;
+		        	ArrayList<ColumnDataModel> newList = new ArrayList<ColumnDataModel>();
+		        	for(ColumnHeadModel datacolumn : columnHeaders)
+		        	{
+		        		newList.add(tableService.getColumnData(i, datacolumn.getId(), table));
+		        		i++;
+		        	}
+		        	columnData.add(newList);
 		        }
 		
 		        mav.addObject("tableTitle", table);

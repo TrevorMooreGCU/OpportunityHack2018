@@ -55,6 +55,7 @@ public class TableDAO implements ITableDAO {
 		
 		while(srs.next()) 
 		{
+			System.out.println(srs.getInt("ID") + srs.getInt("TABLE_NAME_ID") + srs.getString("COLUMN_NAME"));
 			columns.add(new ColumnHeadModel(srs.getInt("ID"),srs.getInt("TABLE_NAME_ID"), srs.getString("COLUMN_NAME")));
 		}
 		
@@ -64,32 +65,34 @@ public class TableDAO implements ITableDAO {
 	@Override
 	public int getNumberColumns(TableModel table)
 	{
-		String query = "SELECT * FROM "+table.getTableName()+"_columns WHERE TABLE_NAME_ID = ?";
+		String query1 = "SELECT * FROM "+table.getTableName()+"_columns WHERE TABLE_NAME_ID = ?";
+		String query2 = "SELECT * FROM "+table.getTableName()+"_data WHERE TABLE_NAME_ID = ?";
 		
-		SqlRowSet srs = jdbcTemplate.queryForRowSet(query, table.getId());
+		SqlRowSet srs1 = jdbcTemplate.queryForRowSet(query1, table.getId());
+		SqlRowSet srs2 = jdbcTemplate.queryForRowSet(query2, table.getId());
 		
 		int i = 0;
-		while(srs.next()) 
+		while(srs1.next()) 
 			i++;
 		
-		return i;
+		int j = 0;
+		while(srs2.next()) 
+			j++;
+		
+		return j / i;
 	}
 	
 	@Override
-	public ArrayList<ColumnDataModel>getColumnData(int id, TableModel table)
+	public ColumnDataModel getColumnData(int id, int columnid, TableModel table)
 	{
-		String query = "SELECT * FROM "+table.getTableName()+"_data WHERE COLUMN_NAME_ID = ?";
+		String query = "SELECT * FROM "+table.getTableName()+"_data WHERE ID = ? AND COLUMN_ID = ?";
 		
-		SqlRowSet srs = jdbcTemplate.queryForRowSet(query, table.getId());
-		
-		ArrayList<ColumnDataModel> data = new ArrayList<ColumnDataModel>();
+		SqlRowSet srs = jdbcTemplate.queryForRowSet(query, id, columnid);
 		
 		while(srs.next()) 
-		{
-			data.add(new ColumnDataModel(srs.getInt("ID"),srs.getInt("COLUMN_NAME_ID"), srs.getString("COLUMN_DATA")));
-		}
+			return new ColumnDataModel(srs.getInt("ID"),table.getId(),srs.getInt("COLUMN_ID"), srs.getString("COLUMN_DATA"));
 		
-		return data;
+		return null;
 	}
 
 	
