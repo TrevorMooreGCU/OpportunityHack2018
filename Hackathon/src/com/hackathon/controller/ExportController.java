@@ -1,36 +1,23 @@
 package com.hackathon.controller;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.supercsv.io.CsvBeanWriter;
-import org.supercsv.io.ICsvBeanWriter;
-import org.supercsv.prefs.CsvPreference;
-import com.hackathon.model.ColumnsModel;
-import com.hackathon.model.ColumnDataModel;
 import com.hackathon.model.ColumnHeadModel;
 import com.hackathon.model.TableModel;
 import com.hackathon.services.business.ITableService;
 import com.opencsv.CSVWriter;
-import com.opencsv.bean.StatefulBeanToCsv;
 
 @Controller
 @RequestMapping("/export")
 public class ExportController 
 {
 	ITableService tableService;
-	
-	private static final String COMMA_DELIMITER = ",";
-    private static final String LINE_SEPARATOR = "\n";
 	
 	@Autowired
 	public void setTableFormService(ITableService service) {
@@ -45,8 +32,7 @@ public class ExportController
 	    File csvFile = new File(file+".csv"); 
 	    
 	    response.setContentType("text/csv");
-	    
-        // creates mock data
+
         String headerKey = "Content-Disposition";
         String headerValue = String.format("attachment; filename=\"%s\"",
         		csvFile);
@@ -84,12 +70,9 @@ public class ExportController
 	        	writer.writeNext(rowData);
 	        }
 
-	  
-	        // closing writer connection 
 	        writer.close(); 
 	    } 
 	    catch (IOException e) { 
-	        // TODO Auto-generated catch block 
 	        e.printStackTrace(); 
 	    } 
 	}
