@@ -132,7 +132,7 @@ public class UploadController
 		        
 		        ArrayList<ArrayList<ColumnDataModel>> columnData = new ArrayList<ArrayList<ColumnDataModel>>();
 		        
-		        int numberColumns = tableService.getNumberColumns(table);
+		        int numberColumns = tableService.getNumberRows(table);
 		        System.out.print(numberColumns);
 		        
 		        int i = 1;
