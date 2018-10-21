@@ -21,7 +21,7 @@
 				<tr>
 				
 				    <c:forEach items="${innerlist}" var="data">
-				        <td>${data.columnData}"></td>
+				        <td>${data.columnData}</td>
 				    </c:forEach>
 				
 				</tr>

@@ -33,7 +33,7 @@ public class ExportController
 	@RequestMapping(value = "/downloadCSV")
     public void downloadCSV(HttpServletResponse response) throws IOException {
  
-		TableModel table = new TableModel(24, "Dogs");
+		TableModel table = new TableModel(29, "dogs");
         String csvFileName = "books.csv";
  
         response.setContentType("text/csv");
