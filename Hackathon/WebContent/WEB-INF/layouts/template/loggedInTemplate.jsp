@@ -5,6 +5,10 @@
 
 <style>
 
+
+
+
+
 	.charts > div {
             width: 560px;
             height: 470px;
