@@ -14,7 +14,7 @@ public class TableFormService implements ITableService {
 	ITableDAO tableDAO;
 
 	@Autowired
-	public void setSecurityDAO(ITableDAO dao)
+	public void setTableDAO(ITableDAO dao)
 	{
 		this.tableDAO = dao;
 	}

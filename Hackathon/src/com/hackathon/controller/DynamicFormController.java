@@ -28,7 +28,7 @@ public class DynamicFormController {
 	ITableService tableService;
 	
 	@Autowired
-	public void setTableService(ITableService service) {
+	public void setTableFormService(ITableService service) {
 		this.tableService = service;
 	}
 	
